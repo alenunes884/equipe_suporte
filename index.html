@@ -12,11 +12,21 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #0d1117; /* Fundo escuro similar ao do logo */
+            background-image: url('https://i.ibb.co/qG6jJvK/Logo-internet-MAIS.png'); /* Seu logo como imagem de fundo */
+            background-size: cover; /* Cobre todo o fundo */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed; /* Fixa o logo no fundo */
+            color: #e2e8f0; /* Texto geral claro */
         }
         @media print {
             body {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                background-image: none; /* Não imprimir o logo de fundo */
+                background-color: #ffffff; /* Fundo branco para impressão */
+                color: #333333; /* Texto escuro para impressão */
             }
             .no-print {
                 display: none !important;
@@ -27,9 +37,29 @@
             .shadow-xl {
                 box-shadow: none !important;
             }
+            /* Reset de cores para impressão */
+            .max-w-5xl { background-color: #ffffff !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            h1, h2, h3, h4, .text-slate-900, .text-slate-800, .text-slate-700, .text-slate-600 { color: #333333 !important; }
+            .border-b, .border-t, .border { border-color: #e2e8f0 !important; }
+            .bg-slate-50 { background-color: #f8fafc !important; border-color: #e2e8f0 !important; }
+            .gradient-text { -webkit-text-fill-color: #4f46e5 !important; } /* Cor sólida para impressão */
+            .ring-1 { border-color: #e2e8f0 !important; }
+            .bg-red-100 { background-color: #fef2f2 !important; }
+            .text-red-800 { color: #991b1b !important; }
+            .bg-orange-100 { background-color: #fff7ed !important; }
+            .text-orange-800 { color: #9a3412 !important; }
+            .bg-yellow-100 { background-color: #fffbeb !important; }
+            .text-yellow-800 { color: #92400e !important; }
+            .bg-blue-100 { background-color: #eff6ff !important; }
+            .text-blue-800 { color: #1e40af !important; }
+            .text-slate-500 { color: #64748b !important; }
+            .text-slate-400 { color: #94a3b8 !important; }
+            .text-slate-200 { background-color: #e2e8f0 !important; }
+            .from-sky-500 { background-color: #0ea5e9 !important; }
+            .to-indigo-500 { background-color: #6366f1 !important; }
         }
         .gradient-text {
-            background: linear-gradient(to right, #4f46e5, #3b82f6);
+            background: linear-gradient(to right, #0093d5, #00c96c); /* Cores do logo */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -42,641 +72,799 @@
         details[open] summary .arrow-down {
             transform: rotate(180deg);
         }
+        /* Ajustes de cor para elementos específicos */
+        .text-slate-900 { color: #f8fafc; } /* Títulos principais */
+        .text-slate-800 { color: #e2e8f0; } /* Títulos de seção, nomes */
+        .text-slate-700 { color: #cbd5e1; } /* Labels, textos médios */
+        .text-slate-600 { color: #94a3b8; } /* Textos secundários, descrições */
+        .text-slate-500 { color: #64748b; } /* Textos de rodapé, notas */
+        .border-b, .border-t, .border { border-color: #334155; } /* Bordas escuras */
+        
+        .bg-slate-50 {
+            background-color: #1e293b; /* Fundo dos cards e gráficos */
+            border-color: #334155; /* Borda dos cards e gráficos */
+        }
+        .ring-slate-200 { border-color: #334155; } /* Borda de detalhes abertos */
+
+        /* Cores para os indicadores de notas baixas */
+        .bg-red-100 { background-color: rgba(220, 38, 38, 0.2); }
+        .text-red-800 { color: #f87171; }
+        .ring-red-200 { border-color: rgba(220, 38, 38, 0.4); }
+
+        .bg-orange-100 { background-color: rgba(245, 158, 11, 0.2); }
+        .text-orange-800 { color: #fbbf24; }
+        .ring-orange-200 { border-color: rgba(245, 158, 11, 0.4); }
+
+        .bg-yellow-100 { background-color: rgba(234, 179, 8, 0.2); }
+        .text-yellow-800 { color: #facc15; }
+        .ring-yellow-200 { border-color: rgba(234, 179, 8, 0.4); }
+
+        .bg-blue-100 { background-color: rgba(59, 130, 246, 0.2); }
+        .text-blue-800 { color: #60a5fa; }
+        .ring-blue-200 { border-color: rgba(59, 130, 246, 0.4); }
+
+        .from-sky-500 { background-color: #0093d5; } /* Azul do logo */
+        .to-indigo-500 { background-color: #00c96c; } /* Verde do logo */
+
+        /* Cores do seletor */
+        select {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border-color: #334155;
+        }
+        select:focus {
+            outline: none;
+            ring-color: #0093d5; /* Azul do logo */
+            border-color: #0093d5; /* Azul do logo */
+        }
     </style>
 </head>
-<body class="bg-slate-100 p-4 sm:p-6 md:p-10">
-    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 relative">
+<body class="p-4 sm:p-6 md:p-10">
+    <div class="max-w-5xl mx-auto bg-gray-900 bg-opacity-70 rounded-2xl shadow-xl p-8 md:p-12 relative border border-gray-800">
         
-        <!-- Seletor de Mês -->
-        <div class="no-print mb-8 flex justify-end">
+        <!-- Seletor de Mês --><div class="no-print mb-8 flex justify-end">
             <div class="flex items-center space-x-2">
-                <label for="month-select" class="text-sm font-medium text-slate-700">Selecione o mês:</label>
-                <select id="month-select" class="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    <option value="agosto">Agosto 01-30</option>
-                    <option value="setembro">Setembro 01-30</option>
-                    <option value="outubro" selected>Outubro 01-24</option>
+                <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
+                <select id="month-select" class="border border-gray-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="agosto">01/08 a 30/08</option>
+                    <option value="setembro">01/09 a 30/09</option>
+                    <option value="outubro">01/10 a 24/10</option>
+                    <option value="outubro-nov" selected>24/10 a 04/11</option>
                 </select>
             </div>
         </div>
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Relatório de Desempenho</h1>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white">Relatório de Desempenho</h1>
             <h2 class="text-2xl font-semibold gradient-text mt-1">Equipe de Suporte Técnico</h2>
-            <p class="text-md text-slate-500 mt-3" id="period-text">Outubro 01-24</p>
+            <p class="text-md text-gray-400 mt-3" id="period-text">24/10 a 04/11</p>
         </header>
 
-        <!-- Métricas Chave -->
-        <section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-slate-800 mb-5 border-b pb-3">Métricas Chave</h3>
+        <!-- Métricas Chave --><section class="mb-12 print-break-inside-avoid">
+            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Métricas Chave</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center" id="key-metrics">
-                <!-- Métricas serão inseridas aqui dinamicamente -->
-            </div>
+                <!-- Métricas serão inseridas aqui dinamicamente --></div>
         </section>
         
-        <!-- Gráfico de Desempenho -->
-        <section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-slate-800 mb-5 border-b pb-3" id="chart-title">Desempenho da Equipe</h3>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 h-[450px]">
+        <!-- Gráfico de Desempenho --><section class="mb-12 print-break-inside-avoid">
+            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3" id="chart-title">Desempenho da Equipe</h3>
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 h-[450px]">
                 <canvas id="performanceChart"></canvas>
             </div>
         </section>
 
-        <!-- Desempenho Individual -->
-        <section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-slate-800 mb-5 border-b pb-3">Desempenho por Atendente</h3>
+        <!-- Desempenho Individual --><section class="mb-12 print-break-inside-avoid">
+            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Desempenho por Atendente</h3>
             <div id="team-performance" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Cards de atendentes serão inseridos aqui -->
-            </div>
+                <!-- Cards de atendentes serão inseridos aqui --></div>
         </section>
 
-        <!-- Motivos de Atendimento -->
-        <section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-slate-800 mb-5 border-b pb-3">Principais Motivos de Atendimento</h3>
+        <!-- Motivos de Atendimento --><section class="mb-12 print-break-inside-avoid">
+            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Principais Motivos de Atendimento</h3>
             <div class="space-y-4" id="reasons-table">
-                 <!-- Linhas da tabela serão inseridas aqui -->
-            </div>
+                 <!-- Linhas da tabela serão inseridas aqui --></div>
         </section>
 
-        <!-- Análise Qualitativa -->
-        <section class="mb-12 print-break-inside-avoid" id="qualitative-section">
+        <!-- Análise Qualitativa --><section class="mb-12 print-break-inside-avoid" id="qualitative-section">
             <div class="mb-6">
-                <h3 class="text-xl font-bold text-slate-800 border-b pb-3" id="qualitative-title">Análise Qualitativa das Notas Baixas</h3>
-                 <p class="text-slate-600 mt-4 text-md" id="qualitative-description">
-                    A análise das avaliações revela um padrão claro: a maioria das notas baixas está diretamente associada a fatores externos ao desempenho individual do suporte, principalmente <strong>falhas massivas</strong> na rede. Outros pontos recorrentes incluem solicitações de natureza <strong>financeira</strong> (desbloqueio de confiança) e <strong>comercial</strong> (contratação), sugerindo uma oportunidade de otimizar o direcionamento desses atendimentos.
-                </p>
+                <h3 class="text-xl font-bold text-gray-200 border-b border-gray-700 pb-3" id="qualitative-title">Análise Qualitativa das Notas Baixas</h3>
+                 <p class="text-gray-400 mt-4 text-md" id="qualitative-description">
+                     A análise das avaliações revela um padrão claro: a maioria das notas baixas está diretamente associada a fatores externos ao desempenho individual do suporte, principalmente <strong>falhas massivas</strong> na rede. Outros pontos recorrentes incluem solicitações de natureza <strong>financeira</strong> (desbloqueio de confiança) e <strong>comercial</strong> (contratação), sugerindo uma oportunidade de otimizar o direcionamento desses atendimentos.
+                 </p>
             </div>
-            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-6 h-[450px]" id="low-scores-chart-container">
+            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-6 h-[450px]" id="low-scores-chart-container">
                 <canvas id="lowScoresChart"></canvas>
             </div>
             <div id="low-scores-analysis" class="space-y-3">
-                <!-- Detalhes das notas baixas serão inseridos aqui -->
-            </div>
+                <!-- Detalhes das notas baixas serão inseridos aqui --></div>
         </section>
 
-        <footer class="text-center text-sm text-slate-400 mt-12 pt-6 border-t border-slate-200">
+        <footer class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-gray-700">
             Relatório gerado em <span id="generation-date"></span> para Internet Mais.
         </footer>
     </div>
 
     <script>
-        document.getElementById('generation-date').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-        
-        // Dados organizados por mês
-        const monthlyData = {
-            agosto: {
-                team: [
-                    { nome: 'Pedro', chat: 85, atendimentos: 7, os: 4, nota: 4.60, tma: 58 },
-                    { nome: 'Vinicius', chat: 63, atendimentos: 17, os: 6, nota: 4.57, tma: 31 },
-                    { nome: 'Paulo', chat: 86, atendimentos: 8, os: 5, nota: 4.30, tma: 43 },
-                    { nome: 'Ricardo', chat: 117, atendimentos: 52, os: 4, nota: 4.57, tma: 57 },
-                    { nome: 'Matheus', chat: 92, atendimentos: 2, os: 3, nota: 4.50, tma: 26 },
-                    { nome: 'Robson', chat: 110, atendimentos: 63, os: 4, nota: 4.69, tma: 33 },
-                    { nome: 'Leonardo', chat: 69, atendimentos: 28, os: 3, nota: 4.88, tma: 26 }
-                ],
-                reasons: { 
-                    'Sem internet/Visita': 47, 
-                    'Sem Internet/Resolvido': 25, 
-                    'Internet Lenta Resolvido': 63, 
-                    'Internet Lenta/Visita': 30, 
-                    'Rompimento de fibra': 55, 
-                    'Falha Massiva': 133, 
-                    'Inatividade do cliente': 73, 
-                    'Assuntos Financeiros': 0, 
-                    'Assuntos Comerciais': 0, 
-                    'Agendamento': 0 
-                },
-                lowScores: null, // Não há dados de notas baixas para agosto
-                keyMetrics: {
-                    volume: 747,
-                    nota: 4.59,
-                    tma: 39.1
-                }
-            },
-            setembro: {
-                team: [
-                    { nome: 'Pedro', chat: 324, atendimentos: 2, os: 39, nota: 4.17, tma: 86 },
-                    { nome: 'Vinicius', chat: 244, atendimentos: 63, os: 60, nota: 4.61, tma: 49 },
-                    { nome: 'Paulo', chat: 295, atendimentos: 8, os: 25, nota: 4.48, tma: 46 },
-                    { nome: 'Ricardo', chat: 415, atendimentos: 79, os: 11, nota: 4.55, tma: 29 },
-                    { nome: 'Matheus', chat: 418, atendimentos: 1, os: 9, nota: 4.40, tma: 21 },
-                    { nome: 'Robson', chat: 426, atendimentos: 179, os: 15, nota: 4.69, tma: 16 },
-                    { nome: 'Leonardo', chat: 332, atendimentos: 123, os: 17, nota: 4.30, tma: 29 }
-                ],
-                reasons: { 
-                    'Sem internet/Visita': 76, 
-                    'Sem Internet/Resolvido': 68, 
-                    'Internet Lenta Resolvido': 132, 
-                    'Internet Lenta/Visita': 60, 
-                    'Rompimento de fibra': 113, 
-                    'Falha Massiva': 330, 
-                    'Inatividade do cliente': 161, 
-                    'Assuntos Financeiros': 222, 
-                    'Assuntos Comerciais': 175, 
-                    'Agendamento': 91 
-                },
-                lowScores: {
-                    'Robson': [
-                        { nota: 1, count: 2, motivos: 'Questões financeiras (liberação de confiança negada).' },
-                        { nota: 2, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                        { nota: 3, count: 1, motivos: 'Cliente solicitando agendamento.' },
-                        { nota: 4, count: 21, motivos: 'Internet lenta, Sem conexão, Desbloqueio de confiança, Solicitação de contratação.' }
+        // Envolve todo o script em um listener para garantir que o DOM esteja carregado
+        // e para evitar poluir o escopo global.
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            document.getElementById('generation-date').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+            
+            // Dados organizados por mês
+            // Adicionado 'periodLabel' para centralizar a informação do período.
+            const monthlyData = {
+                agosto: {
+                    periodLabel: '01/08 a 30/08',
+                    team: [
+                        { nome: 'Pedro', chat: 85, atendimentos: 7, os: 4, nota: 4.60, tma: 58 },
+                        { nome: 'Vinicius', chat: 63, atendimentos: 17, os: 6, nota: 4.57, tma: 31 },
+                        { nome: 'Paulo', chat: 86, atendimentos: 8, os: 5, nota: 4.30, tma: 43 },
+                        { nome: 'Ricardo (12x36)', chat: 117, atendimentos: 52, os: 4, nota: 4.57, tma: 57 },
+                        { nome: 'Matheus (12x36)', chat: 92, atendimentos: 2, os: 3, nota: 4.50, tma: 26 },
+                        { nome: 'Robson (12x36)', chat: 110, atendimentos: 63, os: 4, nota: 4.69, tma: 33 },
+                        { nome: 'Leonardo (12x36)', chat: 69, atendimentos: 28, os: 3, nota: 4.88, tma: 26 }
                     ],
-                    'Matheus': [
-                        { nota: 1, count: 10, motivos: 'Solicitação de contratação, Falha massiva, Contatos encerrados por inatividade.' },
-                        { nota: 2, count: 3, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                        { nota: 3, count: 5, motivos: 'Falha massiva, Desbloqueio de confiança, Solicitação de reativação de link, Contato encerrado por inatividade.' },
-                        { nota: 4, count: 40, motivos: 'Solicitação de contratação, Pedidos de 2ª via de boleto, Desbloqueio de confiança, Relatos de lentidão.' }
-                    ],
-                    'Vinicius': [
-                        { nota: 1, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                        { nota: 2, count: 1, motivos: 'Cliente com internet lenta.' },
-                        { nota: 3, count: 3, motivos: 'Cliente sem conexão devido a falha massiva na região.' },
-                        { nota: 4, count: 17, motivos: 'Internet lenta, Rompimento de fibra, Solicitação de ativação de link.' }
-                    ],
-                    'Ricardo': [
-                        { nota: 1, count: 9, motivos: 'Clientes impactados por falha massiva, Clientes com bloqueio financeiro.' },
-                        { nota: 2, count: 2, motivos: 'Solicitação de horário de visita, Pedido de contratação.' },
-                        { nota: 3, count: 3, motivos: 'Internet lenta, Cliente sem conexão devido a falha massiva.' },
-                        { nota: 4, count: 29, motivos: 'Configuração de aplicativo, Rompimento de fibra, Solicitação de suporte financeiro.' }
-                    ],
-                    'Leonardo': [
-                        { nota: 1, count: 8, motivos: 'Falha massiva, Contatos encerrados por falta de comunicação, Pedidos de desbloqueio de confiança.' },
-                        { nota: 2, count: 4, motivos: 'Falha massiva, Redução de velocidade, Internet lenta.' },
-                        { nota: 3, count: 9, motivos: 'Falha massiva, Internet lenta, Rompimento de fibra.' },
-                        { nota: 4, count: 27, motivos: 'Falha massiva, Rompimento de fibra, Desbloqueio de confiança, Internet lenta, Pedidos de contratação.' }
-                    ],
-                    'Paulo': [
-                        { nota: 1, count: 6, motivos: 'Internet lenta, Falha massiva, Rompimento de fibra.' },
-                        { nota: 2, count: 1, motivos: 'Cliente sem conexão.' },
-                        { nota: 3, count: 4, motivos: 'Falha massiva, Cliente sem internet.' },
-                        { nota: 4, count: 19, motivos: 'Falha massiva, Internet lenta, Agendamento, Rompimento de fibra, Ativação de aplicativo.' }
-                    ],
-                    'Pedro': [
-                        { nota: 1, count: 9, motivos: 'Falha massiva, Solicitação de agendamento.' },
-                        { nota: 2, count: 3, motivos: 'Falha massiva, Lentidão, Contato encerrado por inatividade.' },
-                        { nota: 3, count: 5, motivos: 'Falha massiva, Solicitação de agendamento.' },
-                        { nota: 4, count: 23, motivos: 'Falha massiva, Cliente sem internet, Internet lenta, Ativação de aplicativos, Solicitação de agendamento.' }
-                    ]
-                },
-                keyMetrics: {
-                    volume: 2468,
-                    nota: 4.46,
-                    tma: 39.4
-                }
-            },
-            outubro: {
-                team: [
-                    { nome: 'Pedro', chat: 172, atendimentos: 19, os: 20, nota: 4.24, tma: 131 },
-                    { nome: 'Vinicius', chat: 136, atendimentos: 63, os: 23, nota: 4.75, tma: 47 },
-                    { nome: 'Paulo', chat: 170, atendimentos: 49, os: 13, nota: 4.51, tma: 61 },
-                    { nome: 'Ricardo', chat: 185, atendimentos: 83, os: 11, nota: 4.58, tma: 35 },
-                    { nome: 'Matheus', chat: 191, atendimentos: 44, os: 8, nota: 4.50, tma: 22 },
-                    { nome: 'Robson', chat: 298, atendimentos: 197, os: 7, nota: 4.86, tma: 17 },
-                    { nome: 'Leonardo', chat: 205, atendimentos: 80, os: 6, nota: 4.53, tma: 33 }
-                ],
-                reasons: { 
-                    'Sem internet/Visita': 75, 
-                    'Sem Internet/Resolvido': 70, 
-                    'Internet Lenta Resolvido': 119, 
-                    'Internet Lenta/Visita': 60, 
-                    'Rompimento de fibra': 55, 
-                    'Falha Massiva': 0, 
-                    'Inatividade do cliente': 116, 
-                    'Assuntos Financeiros': 178, 
-                    'Assuntos Comerciais': 50, 
-                    'Agendamento': 105 
-                },
-                lowScores: {
-                    'Pedro': [
-                        { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 3, count: 5, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Vinicius': [
-                        { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                        { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 3, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Robson': [
-                        { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                        { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                        { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                        { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Leonardo': [
-                        { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 2, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Matheus': [
-                        { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Paulo': [
-                        { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                        { nota: 3, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
-                    ],
-                    'Ricardo': [
-                        { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                        { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
-                    ]
-                },
-                keyMetrics: {
-                    volume: 1357,
-                    nota: 4.57,
-                    tma: 49.4
-                }
-            }
-        };
-
-        // Variáveis para armazenar as instâncias dos gráficos
-        let performanceChart = null;
-        let lowScoresChart = null;
-
-        // Ícones para os cards de atendentes
-        const icons = {
-            chat: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" /></svg>`,
-            atendimentos: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>`,
-            os: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-1.707 1.707A1 1 0 003 15v4a1 1 0 001 1h12a1 1 0 001-1v-4a1 1 0 00-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" /></svg>`,
-            nota: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>`,
-            tma: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clip-rule="evenodd" /></svg>`
-        };
-
-        // Função para atualizar o relatório com base no mês selecionado
-        function updateReport(selectedMonth) {
-            const data = monthlyData[selectedMonth];
-            const isOutubro = selectedMonth === 'outubro';
-            const isSetembro = selectedMonth === 'setembro';
-            const isAgosto = selectedMonth === 'agosto';
-            
-            // Atualizar título do período
-            if (isOutubro) {
-                document.getElementById('period-text').textContent = 'Outubro 01-24';
-            } else if (isSetembro) {
-                document.getElementById('period-text').textContent = 'Setembro 01-30';
-            } else {
-                document.getElementById('period-text').textContent = 'Agosto 01-30';
-            }
-            
-            // Atualizar métricas chave
-            updateKeyMetrics(data, selectedMonth);
-            
-            // Atualizar gráfico de desempenho
-            updatePerformanceChart(data, selectedMonth);
-            
-            // Atualizar desempenho da equipe
-            updateTeamPerformance(data, selectedMonth);
-            
-            // Atualizar motivos de atendimento
-            updateReasons(data, selectedMonth);
-            
-            // Atualizar análise qualitativa (apenas para setembro e outubro)
-            updateQualitativeAnalysis(data, selectedMonth);
-        }
-
-        // Função para atualizar as métricas chave
-        function updateKeyMetrics(data, selectedMonth) {
-            const metricsContainer = document.getElementById('key-metrics');
-            const metrics = data.keyMetrics;
-            
-            let metricsHTML = '';
-            
-            metricsHTML = `
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                    <p class="text-slate-600 font-medium">Volume de Atendimentos</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-2">${metrics.volume}</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                    <p class="text-slate-600 font-medium">Nota Média OPA</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-2">${metrics.nota}</p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                    <p class="text-slate-600 font-medium">TMA Médio (min)</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-2">${metrics.tma}</p>
-                </div>
-            `;
-            
-            metricsContainer.innerHTML = metricsHTML;
-        }
-
-        // Função para atualizar o gráfico de desempenho
-        function updatePerformanceChart(data, selectedMonth) {
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            
-            // Destruir gráfico anterior se existir
-            if (performanceChart) {
-                performanceChart.destroy();
-            }
-            
-            const labels = data.team.map(m => m.nome);
-            
-            // Atualizar título do gráfico
-            document.getElementById('chart-title').textContent = 'Desempenho da Equipe';
-            
-            performanceChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Nota OPA',
-                            data: data.team.map(m => m.nota),
-                            backgroundColor: 'rgba(99, 102, 241, 0.8)',
-                            borderColor: 'rgba(79, 70, 229, 1)',
-                            borderWidth: 1,
-                            yAxisID: 'y'
-                        },
-                        {
-                            type: 'line',
-                            label: 'TMA (min)',
-                            data: data.team.map(m => m.tma),
-                            borderColor: 'rgba(67, 56, 202, 1)',
-                            backgroundColor: 'rgba(67, 56, 202, 0.2)',
-                            fill: false,
-                            tension: 0.3,
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false,
+                    reasons: { 
+                        'Sem internet/Visita': 47, 
+                        'Sem Internet/Resolvido': 25, 
+                        'Internet Lenta Resolvido': 63, 
+                        'Internet Lenta/Visita': 30, 
+                        'Rompimento de fibra': 55, 
+                        'Falha Massiva': 133, 
+                        'Inatividade do cliente': 73, 
+                        'Assuntos Financeiros': 0, 
+                        'Assuntos Comerciais': 0, 
+                        'Agendamento': 0 
                     },
-                    scales: {
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            title: {
+                    lowScores: null, // Não há dados de notas baixas para agosto
+                    keyMetrics: {
+                        volume: 747,
+                        nota: 4.59,
+                        tma: 39.1
+                    }
+                },
+                setembro: {
+                    periodLabel: '01/09 a 30/09',
+                    team: [
+                        { nome: 'Pedro', chat: 324, atendimentos: 2, os: 39, nota: 4.17, tma: 86 },
+                        { nome: 'Vinicius', chat: 244, atendimentos: 63, os: 60, nota: 4.61, tma: 49 },
+                        { nome: 'Paulo', chat: 295, atendimentos: 8, os: 25, nota: 4.48, tma: 46 },
+                        { nome: 'Ricardo (12x36)', chat: 415, atendimentos: 79, os: 11, nota: 4.55, tma: 29 },
+                        { nome: 'Matheus (12x36)', chat: 418, atendimentos: 1, os: 9, nota: 4.40, tma: 21 },
+                        { nome: 'Robson (12x36)', chat: 426, atendimentos: 179, os: 15, nota: 4.69, tma: 16 },
+                        { nome: 'Leonardo (12x36)', chat: 332, atendimentos: 123, os: 17, nota: 4.30, tma: 29 }
+                    ],
+                    reasons: { 
+                        'Sem internet/Visita': 76, 
+                        'Sem Internet/Resolvido': 68, 
+                        'Internet Lenta Resolvido': 132, 
+                        'Internet Lenta/Visita': 60, 
+                        'Rompimento de fibra': 113, 
+                        'Falha Massiva': 330, 
+                        'Inatividade do cliente': 161, 
+                        'Assuntos Financeiros': 222, 
+                        'Assuntos Comerciais': 175, 
+                        'Agendamento': 91 
+                    },
+                    lowScores: {
+                        'Robson (12x36)': [
+                            { nota: 1, count: 2, motivos: 'Questões financeiras (liberação de confiança negada).' },
+                            { nota: 2, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
+                            { nota: 3, count: 1, motivos: 'Cliente solicitando agendamento.' },
+                            { nota: 4, count: 21, motivos: 'Internet lenta, Sem conexão, Desbloqueio de confiança, Solicitação de contratação.' }
+                        ],
+                        'Matheus (12x36)': [
+                            { nota: 1, count: 10, motivos: 'Solicitação de contratação, Falha massiva, Contatos encerrados por inatividade.' },
+                            { nota: 2, count: 3, motivos: 'Cliente sem conexão devido a falha massiva.' },
+                            { nota: 3, count: 5, motivos: 'Falha massiva, Desbloqueio de confiança, Solicitação de reativação de link, Contato encerrado por inatividade.' },
+                            { nota: 4, count: 40, motivos: 'Solicitação de contratação, Pedidos de 2ª via de boleto, Desbloqueio de confiança, Relatos de lentidão.' }
+                        ],
+                        'Vinicius': [
+                            { nota: 1, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
+                            { nota: 2, count: 1, motivos: 'Cliente com internet lenta.' },
+                            { nota: 3, count: 3, motivos: 'Cliente sem conexão devido a falha massiva na região.' },
+                            { nota: 4, count: 17, motivos: 'Internet lenta, Rompimento de fibra, Solicitação de ativação de link.' }
+                        ],
+                        'Ricardo (12x36)': [
+                            { nota: 1, count: 9, motivos: 'Clientes impactados por falha massiva, Clientes com bloqueio financeiro.' },
+                            { nota: 2, count: 2, motivos: 'Solicitação de horário de visita, Pedido de contratação.' },
+                            { nota: 3, count: 3, motivos: 'Internet lenta, Cliente sem conexão devido a falha massiva.' },
+                            { nota: 4, count: 29, motivos: 'Configuração de aplicativo, Rompimento de fibra, Solicitação de suporte financeiro.' }
+                        ],
+                        'Leonardo (12x36)': [
+                            { nota: 1, count: 8, motivos: 'Falha massiva, Contatos encerrados por falta de comunicação, Pedidos de desbloqueio de confiança.' },
+                            { nota: 2, count: 4, motivos: 'Falha massiva, Redução de velocidade, Internet lenta.' },
+                            { nota: 3, count: 9, motivos: 'Falha massiva, Internet lenta, Rompimento de fibra.' },
+                            { nota: 4, count: 27, motivos: 'Falha massiva, Rompimento de fibra, Desbloqueio de confiança, Internet lenta, Pedidos de contratação.' }
+                        ],
+                        'Paulo': [
+                            { nota: 1, count: 6, motivos: 'Internet lenta, Falha massiva, Rompimento de fibra.' },
+                            { nota: 2, count: 1, motivos: 'Cliente sem conexão.' },
+                            { nota: 3, count: 4, motivos: 'Falha massiva, Cliente sem internet.' },
+                            { nota: 4, count: 19, motivos: 'Falha massiva, Internet lenta, Agendamento, Rompimento de fibra, Ativação de aplicativo.' }
+                        ],
+                        'Pedro': [
+                            { nota: 1, count: 9, motivos: 'Falha massiva, Solicitação de agendamento.' },
+                            { nota: 2, count: 3, motivos: 'Falha massiva, Lentidão, Contato encerrado por inatividade.' },
+                            { nota: 3, count: 5, motivos: 'Falha massiva, Solicitação de agendamento.' },
+                            { nota: 4, count: 23, motivos: 'Falha massiva, Cliente sem internet, Internet lenta, Ativação de aplicativos, Solicitação de agendamento.' }
+                        ]
+                    },
+                    keyMetrics: {
+                        volume: 2468,
+                        nota: 4.46,
+                        tma: 39.4
+                    }
+                },
+                outubro: {
+                    periodLabel: '01/10 a 24/10',
+                    team: [
+                        { nome: 'Pedro', chat: 172, atendimentos: 19, os: 20, nota: 4.24, tma: 131 },
+                        { nome: 'Vinicius', chat: 136, atendimentos: 63, os: 23, nota: 4.75, tma: 47 },
+                        { nome: 'Paulo', chat: 170, atendimentos: 49, os: 13, nota: 4.51, tma: 61 },
+                        { nome: 'Ricardo (12x36)', chat: 185, atendimentos: 83, os: 11, nota: 4.58, tma: 35 },
+                        { nome: 'Matheus (12x36)', chat: 191, atendimentos: 44, os: 8, nota: 4.50, tma: 22 },
+                        { nome: 'Robson (12x36)', chat: 298, atendimentos: 197, os: 7, nota: 4.86, tma: 17 },
+                        { nome: 'Leonardo (12x36)', chat: 205, atendimentos: 80, os: 6, nota: 4.53, tma: 33 }
+                    ],
+                    reasons: { 
+                        'Sem internet/Visita': 75, 
+                        'Sem Internet/Resolvido': 70, 
+                        'Internet Lenta Resolvido': 119, 
+                        'Internet Lenta/Visita': 60, 
+                        'Rompimento de fibra': 55, 
+                        'Falha Massiva': 0, 
+                        'Inatividade do cliente': 116, 
+                        'Assuntos Financeiros': 178, 
+                        'Assuntos Comerciais': 50, 
+                        'Agendamento': 105 
+                    },
+                    lowScores: {
+                        'Pedro': [
+                            { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 5, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Vinicius': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Robson (12x36)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
+                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Leonardo (12x36)': [
+                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Matheus (12x36)': [
+                            { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Paulo': [
+                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 3, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Ricardo (12x36)': [
+                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
+                        ]
+                    },
+                    keyMetrics: {
+                        volume: 1357,
+                        nota: 4.57,
+                        tma: 49.4
+                    }
+                },
+                'outubro-nov': {
+                    periodLabel: '24/10 a 04/11',
+                    team: [
+                        { nome: 'Pedro', chat: 71, atendimentos: 3, os: 4, nota: 4.45, tma: 54 },
+                        { nome: 'Vinicius', chat: 83, atendimentos: 27, os: 0, nota: 4.56, tma: 54 }, // PDF não informou OS
+                        { nome: 'Paulo', chat: 72, atendimentos: 13, os: 4, nota: 4.52, tma: 57 },
+                        { nome: 'Ricardo (12x36)', chat: 101, atendimentos: 52, os: 2, nota: 4.81, tma: 36 }, // Corrigido de 4:81
+                        { nome: 'Matheus (12x36)', chat: 90, atendimentos: 29, os: 2, nota: 4.60, tma: 31 },
+                        { nome: 'Robson (12x36)', chat: 135, atendimentos: 83, os: 4, nota: 4.72, tma: 20 },
+                        { nome: 'Leonardo (12x36)', chat: 77, atendimentos: 27, os: 2, nota: 4.48, tma: 21 } // Corrigido de 4,48
+                    ],
+                    reasons: { 
+                        'Sem internet/Visita': 0, // PDF não informou
+                        'Sem Internet/Resolvido': 31, 
+                        'Internet Lenta Resolvido': 54, // Corrigido de "Intiemet"
+                        'Internet Lenta/Visita': 23, 
+                        'Rompimento de fibra': 0, // PDF não informou
+                        'Falha Massiva': 0, // PDF não informou
+                        'Inatividade do cliente': 44, 
+                        'Assuntos Financeiros': 107, 
+                        'Assuntos Comerciais': 0, // PDF não informou
+                        'Agendamento': 0 // PDF não informou
+                    },
+                    lowScores: {
+                        'Pedro': [
+                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 3, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Vinicius': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 3, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 4, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Robson (12x36)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 6, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Leonardo (12x36)': [
+                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
+                            { nota: 4, count: 9, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Matheus (12x36)': [
+                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 6, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Paulo': [
+                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 8, motivos: 'Motivos diversos de atendimento.' }
+                        ],
+                        'Ricardo (12x36)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
+                            { nota: 4, count: 5, motivos: 'Motivos diversos de atendimento.' }
+                        ]
+                    },
+                    keyMetrics: {
+                        volume: 631,
+                        nota: 4.59, // Média calculada: (4.45 + 4.56 + 4.52 + 4.81 + 4.60 + 4.72 + 4.48) / 7
+                        tma: 39.0 // Média calculada: (54 + 54 + 57 + 36 + 31 + 20 + 21) / 7
+                    }
+                }
+            };
+
+            // Variáveis para armazenar as instâncias dos gráficos
+            let performanceChart = null;
+            let lowScoresChart = null;
+
+            // Ícones para os cards de atendentes (mantidos os azuis para contraste)
+            const icons = {
+                chat: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" /></svg>`,
+                atendimentos: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>`,
+                os: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6v3.586l-1.707 1.707A1 1 0 003 15v4a1 1 0 001 1h12a1 1 0 001-1v-4a1 1 0 00-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" /></svg>`,
+                nota: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>`,
+                tma: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clip-rule="evenodd" /></svg>`
+            };
+            
+            // Configuração para gerar os cards de métricas de atendente dinamicamente
+            const metricConfig = {
+                chat: { label: 'Conversas Chat', icon: icons.chat, format: (val) => val },
+                atendimentos: { label: 'Atendimentos IXC', icon: icons.atendimentos, format: (val) => val },
+                os: { label: 'OS Finalizadas', icon: icons.os, format: (val) => val },
+                nota: { label: 'Nota OPA', icon: icons.nota, format: (val) => val.toFixed(2) },
+                tma: { label: 'TMA (min)', icon: icons.tma, format: (val) => val }
+            };
+
+            /**
+             * Função principal para atualizar todo o relatório com base no mês selecionado.
+             * @param {string} selectedMonth - A chave do mês (ex: 'agosto', 'setembro').
+             */
+            function updateReport(selectedMonth) {
+                const data = monthlyData[selectedMonth];
+                
+                // Atualizar título do período (agora vindo do objeto de dados)
+                document.getElementById('period-text').textContent = data.periodLabel;
+                
+                // Chamar as funções de atualização
+                updateKeyMetrics(data);
+                updatePerformanceChart(data);
+                updateTeamPerformance(data);
+                updateReasons(data);
+                updateQualitativeAnalysis(data);
+            }
+
+            /**
+             * Atualiza os cards de Métricas Chave.
+             * @param {object} data - O objeto de dados para o mês selecionado.
+             */
+            function updateKeyMetrics(data) {
+                const metricsContainer = document.getElementById('key-metrics');
+                const metrics = data.keyMetrics;
+                
+                metricsContainer.innerHTML = `
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <p class="text-gray-400 font-medium">Volume de Atendimentos</p>
+                        <p class="text-3xl font-bold text-white mt-2">${metrics.volume}</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <p class="text-gray-400 font-medium">Nota Média OPA</p>
+                        <p class="text-3xl font-bold text-white mt-2">${metrics.nota}</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                        <p class="text-gray-400 font-medium">TMA Médio (min)</p>
+                        <p class="text-3xl font-bold text-white mt-2">${metrics.tma}</p>
+                    </div>
+                `;
+            }
+
+            /**
+             * Atualiza o gráfico de desempenho (Nota OPA vs TMA).
+             * @param {object} data - O objeto de dados para o mês selecionado.
+             */
+            function updatePerformanceChart(data) {
+                const ctx = document.getElementById('performanceChart').getContext('2d');
+                
+                // Destruir gráfico anterior se existir
+                if (performanceChart) {
+                    performanceChart.destroy();
+                }
+                
+                const labels = data.team.map(m => m.nome);
+                
+                // Atualizar título do gráfico
+                document.getElementById('chart-title').textContent = 'Desempenho da Equipe';
+                
+                performanceChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Nota OPA',
+                                data: data.team.map(m => m.nota),
+                                backgroundColor: 'rgba(0, 147, 213, 0.8)', /* Azul do logo */
+                                borderColor: 'rgba(0, 147, 213, 1)', /* Azul do logo */
+                                borderWidth: 1,
+                                yAxisID: 'y'
+                            },
+                            {
+                                type: 'line',
+                                label: 'TMA (min)',
+                                data: data.team.map(m => m.tma),
+                                borderColor: 'rgba(0, 201, 108, 1)', /* Verde do logo */
+                                backgroundColor: 'rgba(0, 201, 108, 0.2)', /* Verde do logo */
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
                                 display: true,
-                                text: 'Nota Média OPA',
-                                font: {
-                                    weight: 'bold'
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: 'Nota Média OPA',
+                                    font: { weight: 'bold' },
+                                    color: '#e2e8f0' /* Cor do título do eixo */
+                                },
+                                ticks: { color: '#cbd5e1' }, /* Cor dos ticks */
+                                grid: { color: '#334155' }, /* Cor da grade */
+                                suggestedMin: 4.0,
+                                suggestedMax: 5.0
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: 'TMA (minutos)',
+                                    font: { weight: 'bold' },
+                                    color: '#e2e8f0' /* Cor do título do eixo */
+                                },
+                                ticks: { color: '#cbd5e1' }, /* Cor dos ticks */
+                                grid: {
+                                    drawOnChartArea: false,
+                                    color: '#334155' /* Cor da grade */
+                                },
+                                suggestedMin: 0
+                            },
+                            x: {
+                                ticks: { color: '#cbd5e1' }, /* Cor dos ticks do eixo X */
+                                grid: { color: '#334155' } /* Cor da grade */
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#e2e8f0' /* Cor das legendas */
                                 }
                             },
-                            suggestedMin: 4.0,
-                            suggestedMax: 5.0
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            title: {
-                                display: true,
-                                text: 'TMA (minutos)',
-                                font: {
-                                    weight: 'bold'
-                                }
-                            },
-                            grid: {
-                                drawOnChartArea: false,
-                            },
-                            suggestedMin: 0
-                        }
-                    },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) { label += ': '; }
-                                    if (context.parsed.y !== null) {
-                                        if(context.dataset.type === 'line'){ 
-                                            label += context.parsed.y + ' min'; 
-                                        } else { 
-                                            label += context.parsed.y.toFixed(2); 
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed.y !== null) {
+                                            if(context.dataset.type === 'line'){ 
+                                                label += context.parsed.y + ' min'; 
+                                            } else { 
+                                                label += context.parsed.y.toFixed(2); 
+                                            }
                                         }
+                                        return label;
                                     }
-                                    return label;
                                 }
                             }
                         }
                     }
-                }
-            });
-        }
-
-        // Função para atualizar o desempenho da equipe
-        function updateTeamPerformance(data, selectedMonth) {
-            const teamContainer = document.getElementById('team-performance');
-            teamContainer.innerHTML = '';
-            
-            data.team.forEach(member => {
-                let cardHTML = '';
-                
-                cardHTML = `
-                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 transition-all duration-300 hover:shadow-md hover:border-indigo-300">
-                        <h4 class="font-bold text-lg text-slate-800">${member.nome}</h4>
-                        <div class="mt-4 space-y-3 text-sm">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2 text-slate-600">${icons.chat} Conversas Chat:</div>
-                                <span class="font-semibold text-slate-800">${member.chat}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2 text-slate-600">${icons.atendimentos} Atendimentos IXC:</div>
-                                <span class="font-semibold text-slate-800">${member.atendimentos}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2 text-slate-600">${icons.os} OS Finalizadas:</div>
-                                <span class="font-semibold text-slate-800">${member.os}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2 text-slate-600">${icons.nota} Nota OPA:</div>
-                                <span class="font-semibold text-slate-800">${member.nota.toFixed(2)}</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2 text-slate-600">${icons.tma} TMA (min):</div>
-                                <span class="font-semibold text-slate-800">${member.tma}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                teamContainer.innerHTML += cardHTML;
-            });
-        }
-
-        // Função para atualizar os motivos de atendimento
-        function updateReasons(data, selectedMonth) {
-            const reasonsContainer = document.getElementById('reasons-table');
-            reasonsContainer.innerHTML = '';
-            
-            const reasons = data.reasons;
-            const allReasons = Object.keys(reasons);
-            const maxValue = Math.max(...Object.values(reasons));
-            
-            allReasons.sort((a, b) => reasons[b] - reasons[a]);
-            
-            allReasons.forEach(reason => {
-                const count = reasons[reason];
-                
-                if (count === 0) return; // Não mostrar motivos com zero ocorrências
-                
-                let rowHTML = '';
-                const barWidth = maxValue > 0 ? (count / maxValue) * 100 : 0;
-                
-                rowHTML = `
-                    <div class="text-sm">
-                        <div class="flex justify-between items-center mb-1.5">
-                            <span class="font-medium text-slate-700">${reason}</span>
-                            <span class="font-semibold text-slate-800">${count}</span>
-                        </div>
-                        <div class="w-full bg-slate-200 rounded-full h-2.5">
-                            <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-2.5 rounded-full" style="width: ${barWidth}%"></div>
-                        </div>
-                    </div>
-                `;
-                
-                reasonsContainer.innerHTML += rowHTML;
-            });
-        }
-
-        // Função para atualizar a análise qualitativa
-        function updateQualitativeAnalysis(data, selectedMonth) {
-            const qualitativeSection = document.getElementById('qualitative-section');
-            const lowScoresContainer = document.getElementById('low-scores-analysis');
-            const chartContainer = document.getElementById('low-scores-chart-container');
-            
-            if (selectedMonth === 'agosto') {
-                // Ocultar análise qualitativa para agosto
-                qualitativeSection.style.display = 'none';
-            } else {
-                // Mostrar análise qualitativa para setembro e outubro
-                qualitativeSection.style.display = 'block';
-                
-                // Atualizar gráfico de notas baixas
-                updateLowScoresChart(data.lowScores, selectedMonth);
-                
-                // Atualizar análise detalhada
-                lowScoresContainer.innerHTML = '';
-                const attendantLabels = Object.keys(data.lowScores);
-                
-                attendantLabels.forEach(attendant => {
-                    const details = data.lowScores[attendant];
-                    let detailsHTML = '';
-                    
-                    details.forEach(detail => {
-                        let bgColor = 'bg-amber-100';
-                        let textColor = 'text-amber-800';
-                        let ringColor = 'ring-amber-200';
-                        if (detail.nota === 1) { bgColor = 'bg-red-100'; textColor = 'text-red-800'; ringColor = 'ring-red-200'; }
-                        if (detail.nota === 2) { bgColor = 'bg-orange-100'; textColor = 'text-orange-800'; ringColor = 'ring-orange-200'; }
-                        if (detail.nota === 3) { bgColor = 'bg-yellow-100'; textColor = 'text-yellow-800'; ringColor = 'ring-yellow-200'; }
-
-                        detailsHTML += `
-                            <div class="p-4 rounded-lg ring-1 ${ringColor} ${bgColor}">
-                                <h5 class="font-bold ${textColor}">Nota ${detail.nota} <span class="font-normal text-sm">(${detail.count} avaliações)</span></h5>
-                                <p class="mt-2 text-sm ${textColor.replace('800', '700')}">${detail.motivos}</p>
-                            </div>
-                        `;
-                    });
-
-                    const attendantHTML = `
-                        <details class="bg-slate-50 border border-slate-200 rounded-lg overflow-hidden">
-                            <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-slate-800">
-                                ${attendant}
-                                <svg class="w-5 h-5 text-slate-500 transition-transform transform arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </summary>
-                            <div class="p-4 border-t border-slate-200 bg-white">
-                                <div class="space-y-3">
-                                    ${detailsHTML}
-                                </div>
-                            </div>
-                        </details>
-                    `;
-                    lowScoresContainer.innerHTML += attendantHTML;
                 });
             }
-        }
 
-        // Função para atualizar o gráfico de notas baixas
-        function updateLowScoresChart(lowScoresData, selectedMonth) {
-            const ctx = document.getElementById('lowScoresChart').getContext('2d');
-            
-            // Destruir gráfico anterior se existir
-            if (lowScoresChart) {
-                lowScoresChart.destroy();
+            /**
+             * Atualiza os cards de desempenho individual da equipe.
+             * Gera as métricas dinamicamente com base em 'metricConfig'.
+             * @param {object} data - O objeto de dados para o mês selecionado.
+             */
+            function updateTeamPerformance(data) {
+                const teamContainer = document.getElementById('team-performance');
+                teamContainer.innerHTML = '';
+                
+                data.team.forEach(member => {
+                    // Constrói a lista de métricas dinamicamente
+                    let metricsHTML = '';
+                    for (const key in metricConfig) {
+                        if (Object.hasOwnProperty.call(member, key)) {
+                            const config = metricConfig[key];
+                            const value = config.format(member[key]);
+                            metricsHTML += `
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-2 text-gray-400">${config.icon} ${config.label}:</div>
+                                    <span class="font-semibold text-gray-200">${value}</span>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    // Cria o card do atendente
+                    const cardHTML = `
+                        <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 transition-all duration-300 hover:shadow-md hover:border-blue-500">
+                            <h4 class="font-bold text-lg text-white">${member.nome}</h4>
+                            <div class="mt-4 space-y-3 text-sm">
+                                ${metricsHTML}
+                            </div>
+                        </div>
+                    `;
+                    
+                    teamContainer.innerHTML += cardHTML;
+                });
             }
-            
-            const lowScoresLabels = Object.keys(lowScoresData);
-            const nota1Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 1)?.count || 0);
-            const nota2Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 2)?.count || 0);
-            const nota3Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 3)?.count || 0);
-            const nota4Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 4)?.count || 0);
 
-            lowScoresChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: lowScoresLabels,
-                    datasets: [
-                        { label: 'Nota 1', data: nota1Data, backgroundColor: 'rgba(220, 38, 38, 0.8)' },
-                        { label: 'Nota 2', data: nota2Data, backgroundColor: 'rgba(245, 158, 11, 0.8)' },
-                        { label: 'Nota 3', data: nota3Data, backgroundColor: 'rgba(139, 92, 246, 0.8)' },
-                        { label: 'Nota 4', data: nota4Data, backgroundColor: 'rgba(59, 130, 246, 0.8)' }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true },
-                        y: { 
-                            stacked: true,
+            /**
+             * Atualiza a tabela de barras com os motivos de atendimento.
+             * @param {object} data - O objeto de dados para o mês selecionado.
+             */
+            function updateReasons(data) {
+                const reasonsContainer = document.getElementById('reasons-table');
+                reasonsContainer.innerHTML = '';
+                
+                const reasons = data.reasons;
+                const allReasons = Object.keys(reasons);
+                const maxValue = Math.max(...Object.values(reasons));
+                
+                // Ordena do maior para o menor
+                allReasons.sort((a, b) => reasons[b] - reasons[a]);
+                
+                allReasons.forEach(reason => {
+                    const count = reasons[reason];
+                    
+                    // Não mostrar motivos com zero ocorrências
+                    if (count === 0) return; 
+                    
+                    const barWidth = maxValue > 0 ? (count / maxValue) * 100 : 0;
+                    
+                    const rowHTML = `
+                        <div class="text-sm">
+                            <div class="flex justify-between items-center mb-1.5">
+                                <span class="font-medium text-gray-300">${reason}</span>
+                                <span class="font-semibold text-white">${count}</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-gradient-to-r from-[#0093d5] to-[#00c96c] h-2.5 rounded-full" style="width: ${barWidth}%"></div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    reasonsContainer.innerHTML += rowHTML;
+                });
+            }
+
+            /**
+             * Retorna as classes de cor com base na nota.
+             * @param {number} nota - A nota (1, 2, 3 ou 4).
+             * @returns {object} - Um objeto com as classes de 'bg', 'text' e 'ring'.
+             */
+            function getScoreColors(nota) {
+                switch (nota) {
+                    case 1: return { bg: 'bg-red-100', text: 'text-red-800', ring: 'ring-red-200' };
+                    case 2: return { bg: 'bg-orange-100', text: 'text-orange-800', ring: 'ring-orange-200' };
+                    case 3: return { bg: 'bg-yellow-100', text: 'text-yellow-800', ring: 'ring-yellow-200' };
+                    case 4: return { bg: 'bg-blue-100', text: 'text-blue-800', ring: 'ring-blue-200' };
+                    default: return { bg: 'bg-gray-800', text: 'text-gray-200', ring: 'ring-gray-700' };
+                }
+            }
+
+            /**
+             * Atualiza a seção de análise qualitativa (gráfico e detalhes).
+             * @param {object} data - O objeto de dados para o mês selecionado.
+             */
+            function updateQualitativeAnalysis(data) {
+                const qualitativeSection = document.getElementById('qualitative-section');
+                const lowScoresContainer = document.getElementById('low-scores-analysis');
+                
+                if (!data.lowScores) {
+                    // Ocultar análise qualitativa se não houver dados (ex: Agosto)
+                    qualitativeSection.style.display = 'none';
+                } else {
+                    // Mostrar análise qualitativa
+                    qualitativeSection.style.display = 'block';
+                    
+                    // Atualizar gráfico de notas baixas
+                    updateLowScoresChart(data.lowScores);
+                    
+                    // Atualizar análise detalhada
+                    lowScoresContainer.innerHTML = '';
+                    const attendantLabels = Object.keys(data.lowScores);
+                    
+                    attendantLabels.forEach(attendant => {
+                        const details = data.lowScores[attendant];
+                        let detailsHTML = '';
+                        
+                        details.forEach(detail => {
+                            const colors = getScoreColors(detail.nota); // Usa a função auxiliar
+                            detailsHTML += `
+                                <div class="p-4 rounded-lg ring-1 ${colors.ring} ${colors.bg}">
+                                    <h5 class="font-bold ${colors.text}">Nota ${detail.nota} <span class="font-normal text-sm ${colors.text.replace('800', '600')}">(${detail.count} avaliações)</span></h5>
+                                    <p class="mt-2 text-sm ${colors.text.replace('800', '500')}">${detail.motivos}</p>
+                                </div>
+                            `;
+                        });
+
+                        const attendantHTML = `
+                            <details class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden">
+                                <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-white">
+                                    ${attendant}
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform transform arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </summary>
+                                <div class="p-4 border-t border-gray-700 bg-gray-900">
+                                    <div class="space-y-3">
+                                        ${detailsHTML}
+                                    </div>
+                                </div>
+                            </details>
+                        `;
+                        lowScoresContainer.innerHTML += attendantHTML;
+                    });
+                }
+            }
+
+            /**
+             * Atualiza o gráfico de barras empilhadas das notas baixas.
+             * @param {object} lowScoresData - O objeto de dados 'lowScores' do mês.
+             */
+            function updateLowScoresChart(lowScoresData) {
+                const ctx = document.getElementById('lowScoresChart').getContext('2d');
+                
+                // Destruir gráfico anterior se existir
+                if (lowScoresChart) {
+                    lowScoresChart.destroy();
+                }
+                
+                const lowScoresLabels = Object.keys(lowScoresData);
+                const nota1Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 1)?.count || 0);
+                const nota2Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 2)?.count || 0);
+                const nota3Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 3)?.count || 0);
+                const nota4Data = lowScoresLabels.map(name => lowScoresData[name].find(d => d.nota === 4)?.count || 0);
+
+                lowScoresChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: lowScoresLabels,
+                        datasets: [
+                            { label: 'Nota 1', data: nota1Data, backgroundColor: 'rgba(220, 38, 38, 0.8)' }, // Vermelho
+                            { label: 'Nota 2', data: nota2Data, backgroundColor: 'rgba(245, 158, 11, 0.8)' }, // Laranja
+                            { label: 'Nota 3', data: nota3Data, backgroundColor: 'rgba(234, 179, 8, 0.8)' }, // Amarelo
+                            { label: 'Nota 4', data: nota4Data, backgroundColor: 'rgba(59, 130, 246, 0.8)' } // Azul
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { 
+                                stacked: true,
+                                ticks: { color: '#cbd5e1' }, /* Cor dos ticks do eixo X */
+                                grid: { color: '#334155' } /* Cor da grade */
+                            },
+                            y: { 
+                                stacked: true,
+                                title: {
+                                    display: true,
+                                    text: 'Quantidade de Avaliações',
+                                    font: { weight: 'bold' },
+                                    color: '#e2e8f0' /* Cor do título do eixo */
+                                },
+                                ticks: { color: '#cbd5e1' }, /* Cor dos ticks */
+                                grid: { color: '#334155' } /* Cor da grade */
+                            }
+                        },
+                        plugins: {
                             title: {
                                 display: true,
-                                text: 'Quantidade de Avaliações',
-                                font: {
-                                    weight: 'bold'
+                                text: `Distribuição de Notas Baixas por Atendente`,
+                                font: { size: 16, weight: 'bold' },
+                                color: '#e2e8f0' /* Cor do título do gráfico */
+                            },
+                            legend: {
+                                labels: {
+                                    color: '#e2e8f0' /* Cor das legendas */
                                 }
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: `Distribuição de Notas Baixas por Atendente`,
-                            font: { size: 16, weight: 'bold' }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) { label += ': '; }
-                                    if (context.parsed.y !== null) {
-                                        label += context.parsed.y;
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) { label += ': '; }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y;
+                                        }
+                                        return label;
                                     }
-                                    return label;
                                 }
                             }
                         }
                     }
-                }
-            });
-        }
+                });
+            }
 
-        // Inicializar o relatório com outubro selecionado
-        document.addEventListener('DOMContentLoaded', function() {
-            updateReport('outubro');
+            // --- Inicialização ---
+
+            // Inicializar o relatório com outubro selecionado
+            updateReport('outubro-nov');
             
             // Adicionar evento de mudança no seletor de mês
             document.getElementById('month-select').addEventListener('change', function() {
                 updateReport(this.value);
             });
-        });
+
+        }); // Fim do DOMContentLoaded
     </script>
 </body>
 </html>
+
+
+
