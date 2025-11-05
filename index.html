@@ -40,7 +40,7 @@
             /* Reset de cores para impressão */
             .max-w-5xl { background-color: #ffffff !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
             h1, h2, h3, h4, .text-slate-900, .text-slate-800, .text-slate-700, .text-slate-600 { color: #333333 !important; }
-            .border-b, .border-t, .border { border-color: #e2e8f0 !important; }
+            .border-b, .border-t, .border, .border-l-4 { border-color: #e2e8f0 !important; }
             .bg-slate-50 { background-color: #f8fafc !important; border-color: #e2e8f0 !important; }
             .gradient-text { -webkit-text-fill-color: #4f46e5 !important; } /* Cor sólida para impressão */
             .ring-1 { border-color: #e2e8f0 !important; }
@@ -57,6 +57,25 @@
             .text-slate-200 { background-color: #e2e8f0 !important; }
             .from-sky-500 { background-color: #0ea5e9 !important; }
             .to-indigo-500 { background-color: #6366f1 !important; }
+            .glass-card {
+                background-color: rgba(30, 41, 59, 0.7); /* bg-slate-800/70 */
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            .glass-card:hover {
+                border-color: rgba(0, 147, 213, 0.5); /* Azul do logo */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+            .section-title {
+                font-size: 1.25rem; /* text-xl */
+                font-weight: 700; /* font-bold */
+                color: #f1f5f9; /* text-slate-100 */
+                margin-bottom: 1.25rem; /* mb-5 */
+                padding-left: 0.75rem; /* pl-3 */
+                border-left-width: 4px;
+                border-color: #0093d5; /* Azul do logo */
+            }
         }
         .gradient-text {
             background: linear-gradient(to right, #0093d5, #00c96c); /* Cores do logo */
@@ -120,66 +139,94 @@
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-10">
-    <div class="max-w-5xl mx-auto bg-gray-900 bg-opacity-70 rounded-2xl shadow-xl p-8 md:p-12 relative border border-gray-800">
+    <div class="max-w-7xl mx-auto bg-slate-900/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 relative border border-slate-700">
         
-        <!-- Seletor de Mês --><div class="no-print mb-8 flex justify-end">
-            <div class="flex items-center space-x-2">
-                <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
-                <select id="month-select" class="border border-gray-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="agosto">01/08 a 30/08</option>
-                    <option value="setembro">01/09 a 30/09</option>
-                    <option value="outubro">01/10 a 24/10</option>
-                    <option value="outubro-nov" selected>24/10 a 04/11</option>
-                </select>
+        <!-- Seletor de Mês -->
+        <div class="no-print mb-8 flex justify-between items-center">
+            <div class="text-left">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white">Relatório de Desempenho</h1>
+                <h2 class="text-xl font-semibold gradient-text mt-1">Equipe de Suporte Técnico</h2>
+            </div>
+            <div class="flex-shrink-0 flex flex-col items-end">
+                <div class="flex items-center space-x-2">
+                    <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
+                    <select id="month-select" class="bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="agosto">01/08 a 30/08</option>
+                        <option value="setembro">01/09 a 30/09</option>
+                        <option value="outubro">01/10 a 24/10</option>
+                        <option value="outubro-nov" selected>24/10 a 04/11</option>
+                    </select>
+                </div>
+                <p class="text-md text-gray-400 mt-2" id="period-text">24/10 a 04/11</p>
             </div>
         </div>
 
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white">Relatório de Desempenho</h1>
-            <h2 class="text-2xl font-semibold gradient-text mt-1">Equipe de Suporte Técnico</h2>
-            <p class="text-md text-gray-400 mt-3" id="period-text">24/10 a 04/11</p>
-        </header>
-
-        <!-- Métricas Chave --><section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Métricas Chave</h3>
+        <!-- Métricas Chave -->
+        <section class="mb-8 print-break-inside-avoid">
+            <h3 class="section-title">Métricas Chave</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center" id="key-metrics">
-                <!-- Métricas serão inseridas aqui dinamicamente --></div>
+                <!-- Métricas serão inseridas aqui dinamicamente -->
+            </div>
         </section>
         
-        <!-- Gráfico de Desempenho --><section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3" id="chart-title">Desempenho da Equipe</h3>
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 h-[450px]">
-                <canvas id="performanceChart"></canvas>
+        <!-- Layout Principal em Grid -->
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Coluna Principal (2/3) -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Análise Qualitativa -->
+                <section class="print-break-inside-avoid" id="qualitative-section">
+                    <h3 class="section-title" id="qualitative-title">Análise Qualitativa</h3>
+                    <div class="glass-card p-6 rounded-xl">
+                        <p class="text-gray-400 text-sm mb-6" id="qualitative-description">
+                            A maioria das notas baixas está associada a fatores externos (falhas massivas) ou solicitações financeiras/comerciais, sugerindo uma oportunidade de otimizar o direcionamento.
+                        </p>
+                        <div class="h-[350px] mb-6" id="low-scores-chart-container">
+                            <canvas id="lowScoresChart"></canvas>
+                        </div>
+                        <div id="low-scores-analysis" class="space-y-3">
+                            <!-- Detalhes das notas baixas serão inseridos aqui -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Desempenho Individual -->
+                <section class="print-break-inside-avoid">
+                    <h3 class="section-title">Desempenho por Atendente</h3>
+                    <div id="team-performance" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Cards de atendentes serão inseridos aqui -->
+                    </div>
+                </section>
+
             </div>
-        </section>
 
-        <!-- Desempenho Individual --><section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Desempenho por Atendente</h3>
-            <div id="team-performance" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Cards de atendentes serão inseridos aqui --></div>
-        </section>
+            <!-- Barra Lateral (1/3) -->
+            <div class="lg:col-span-1 space-y-6">
 
-        <!-- Motivos de Atendimento --><section class="mb-12 print-break-inside-avoid">
-            <h3 class="text-xl font-bold text-gray-200 mb-5 border-b border-gray-700 pb-3">Principais Motivos de Atendimento</h3>
-            <div class="space-y-4" id="reasons-table">
-                 <!-- Linhas da tabela serão inseridas aqui --></div>
-        </section>
+                <!-- Motivos de Atendimento -->
+                <section class="print-break-inside-avoid">
+                    <h3 class="section-title">Principais Motivos de Atendimento</h3>
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="space-y-4" id="reasons-table">
+                            <!-- Linhas da tabela serão inseridas aqui -->
+                        </div>
+                    </div>
+                </section>
 
-        <!-- Análise Qualitativa --><section class="mb-12 print-break-inside-avoid" id="qualitative-section">
-            <div class="mb-6">
-                <h3 class="text-xl font-bold text-gray-200 border-b border-gray-700 pb-3" id="qualitative-title">Análise Qualitativa das Notas Baixas</h3>
-                 <p class="text-gray-400 mt-4 text-md" id="qualitative-description">
-                     A análise das avaliações revela um padrão claro: a maioria das notas baixas está diretamente associada a fatores externos ao desempenho individual do suporte, principalmente <strong>falhas massivas</strong> na rede. Outros pontos recorrentes incluem solicitações de natureza <strong>financeira</strong> (desbloqueio de confiança) e <strong>comercial</strong> (contratação), sugerindo uma oportunidade de otimizar o direcionamento desses atendimentos.
-                 </p>
+                <!-- Gráfico de Desempenho -->
+                <section class="print-break-inside-avoid">
+                    <h3 class="section-title" id="chart-title">Desempenho da Equipe</h3>
+                    <div class="glass-card p-6 rounded-xl h-[450px]">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </section>
+
             </div>
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-6 h-[450px]" id="low-scores-chart-container">
-                <canvas id="lowScoresChart"></canvas>
-            </div>
-            <div id="low-scores-analysis" class="space-y-3">
-                <!-- Detalhes das notas baixas serão inseridos aqui --></div>
-        </section>
 
-        <footer class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-gray-700">
+        </div>
+
+        <footer class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-slate-700">
             Relatório gerado em <span id="generation-date"></span> para Internet Mais.
         </footer>
     </div>
@@ -496,16 +543,16 @@
                 const metrics = data.keyMetrics;
                 
                 metricsContainer.innerHTML = `
-                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div class="glass-card p-6 rounded-xl">
                         <p class="text-gray-400 font-medium">Volume de Atendimentos</p>
                         <p class="text-3xl font-bold text-white mt-2">${metrics.volume}</p>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div class="glass-card p-6 rounded-xl">
                         <p class="text-gray-400 font-medium">Nota Média OPA</p>
                         <p class="text-3xl font-bold text-white mt-2">${metrics.nota}</p>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-                        <p class="text-gray-400 font-medium">TMA Médio (min)</p>
+                    <div class="glass-card p-6 rounded-xl">
+                        <p class="text-gray-400 font-medium">TMA Média (min)</p>
                         <p class="text-3xl font-bold text-white mt-2">${metrics.tma}</p>
                     </div>
                 `;
@@ -652,7 +699,7 @@
 
                     // Cria o card do atendente
                     const cardHTML = `
-                        <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 transition-all duration-300 hover:shadow-md hover:border-blue-500">
+                        <div class="glass-card p-5 rounded-xl">
                             <h4 class="font-bold text-lg text-white">${member.nome}</h4>
                             <div class="mt-4 space-y-3 text-sm">
                                 ${metricsHTML}
@@ -693,7 +740,7 @@
                                 <span class="font-medium text-gray-300">${reason}</span>
                                 <span class="font-semibold text-white">${count}</span>
                             </div>
-                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="w-full bg-slate-700 rounded-full h-2.5">
                                 <div class="bg-gradient-to-r from-[#0093d5] to-[#00c96c] h-2.5 rounded-full" style="width: ${barWidth}%"></div>
                             </div>
                         </div>
@@ -755,14 +802,14 @@
                         });
 
                         const attendantHTML = `
-                            <details class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden">
-                                <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-white">
+                            <details class="glass-card bg-slate-800/60 border border-slate-700 rounded-lg overflow-hidden">
+                                <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-white hover:bg-slate-700 transition-colors">
                                     ${attendant}
                                     <svg class="w-5 h-5 text-gray-400 transition-transform transform arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </summary>
-                                <div class="p-4 border-t border-gray-700 bg-gray-900">
+                                <div class="p-4 border-t border-slate-700 bg-slate-900/60">
                                     <div class="space-y-3">
                                         ${detailsHTML}
                                     </div>
@@ -867,6 +914,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
