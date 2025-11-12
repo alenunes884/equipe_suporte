@@ -154,10 +154,11 @@
                         <option value="agosto">01/08 a 30/08</option>
                         <option value="setembro">01/09 a 30/09</option>
                         <option value="outubro">01/10 a 24/10</option>
-                        <option value="outubro-nov" selected>24/10 a 04/11</option>
+                        <option value="outubro-nov">24/10 a 04/11</option>
+                        <option value="novembro-inicio" selected>01/11 a 10/11</option>
                     </select>
                 </div>
-                <p class="text-md text-gray-400 mt-2" id="period-text">24/10 a 04/11</p>
+                <p class="text-md text-gray-400 mt-2" id="period-text">01/11 a 10/11</p>
             </div>
         </div>
 
@@ -488,6 +489,80 @@
                         volume: 631,
                         nota: 4.59, // Média calculada: (4.45 + 4.56 + 4.52 + 4.81 + 4.60 + 4.72 + 4.48) / 7
                         tma: 39.0 // Média calculada: (54 + 54 + 57 + 36 + 31 + 20 + 21) / 7
+                    }
+                },
+                'novembro-inicio': {
+                    periodLabel: '01/11 a 10/11',
+                    team: [
+                        { nome: 'Pedro', chat: 33, atendimentos: 3, os: 8, nota: 3.82, tma: 101, ativacoes: 0 },
+                        { nome: 'Vinicius', chat: 97, atendimentos: 20, os: 6, nota: 4.32, tma: 56, ativacoes: 0 },
+                        { nome: 'Paulo', chat: 107, atendimentos: 0, os: 7, nota: 4.39, tma: 43, ativacoes: 0 }, // PDF não informou atendimentos
+                        { nome: 'Ricardo (12x36)', chat: 108, atendimentos: 45, os: 2, nota: 4.73, tma: 32, ativacoes: 0 },
+                        { nome: 'Matheus (12x36)', chat: 133, atendimentos: 30, os: 4, nota: 4.78, tma: 23, ativacoes: 0 },
+                        { nome: 'Robson (12x38)', chat: 207, atendimentos: 115, os: 6, nota: 4.78, tma: 14, ativacoes: 0 },
+                        { nome: 'Leonardo (12x36)', chat: 117, atendimentos: 36, os: 1, nota: 4.42, tma: 23, ativacoes: 0 } // Corrigido de 442
+                    ],
+                    reasons: { 
+                        // PDF não forneceu valores para os motivos
+                        'Sem internet/Visita': 0,
+                        'Sem Internet/Resolvido': 0, 
+                        'Internet Lenta Resolvido': 0,
+                        'Internet Lenta/Visita': 0, 
+                        'Rompimento de fibra': 0,
+                        'Falha Massiva': 0,
+                        'Inatividade do cliente': 0, 
+                        'Assuntos Financeiros': 0, 
+                        'Assuntos Comerciais': 0,
+                        'Agendamento': 0
+                    },
+                    lowScores: {
+                        'Pedro': [
+                            { nota: 1, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 3, count: 2, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 4, count: 2, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Vinicius': [
+                            { nota: 1, count: 2, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 3, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 4, count: 4, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Robson (12x38)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
+                            { nota: 4, count: 11, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Leonardo (12x36)': [
+                            { nota: 1, count: 4, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
+                            { nota: 4, count: 9, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Matheus (12x36)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 4, count: 9, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Paulo': [
+                            { nota: 1, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 3, count: 4, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 4, count: 7, motivos: 'Motivos de acordo com PDF.' }
+                        ],
+                        'Ricardo (12x36)': [
+                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
+                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
+                            { nota: 3, count: 3, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 4, count: 7, motivos: 'Motivos de acordo com PDF.' }
+                        ]
+                    },
+                    keyMetrics: {
+                        volume: 802,
+                        nota: 4.46, // Média calculada
+                        tma: 41.7 // Média calculada
                     }
                 }
             };
@@ -903,7 +978,7 @@
             // --- Inicialização ---
 
             // Inicializar o relatório com outubro selecionado
-            updateReport('outubro-nov');
+            updateReport('novembro-inicio');
             
             // Adicionar evento de mudança no seletor de mês
             document.getElementById('month-select').addEventListener('change', function() {
@@ -914,10 +989,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
