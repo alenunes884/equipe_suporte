@@ -162,32 +162,31 @@
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-10">
-    <div class="max-w-7xl mx-auto bg-slate-900/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 relative border border-slate-700">
+    <div class="max-w-7xl mx-auto bg-slate-900/70 backdrop-blur-lg rounded-2xl shadow-xl p-4 sm:p-8 md:p-12 relative border border-slate-700">
         
-        <!-- Cabeçalho Principal -->
-        <header class="mb-8 flex justify-between items-center">
-            <div class="text-left">
+        <!-- Cabeçalho Principal (Responsivo) -->
+        <header class="mb-8 flex flex-col md:flex-row md:justify-between md:items-center">
+            <div class="text-left w-full text-center md:text-left">
                 <h1 class="text-3xl md:text-4xl font-extrabold text-white">Relatório de Desempenho</h1>
                 <h2 class="text-xl font-semibold gradient-text mt-1">Equipe de Suporte Técnico</h2>
             </div>
-            <!-- Abas de Navegação -->
-            <div class="flex space-x-4 border-b border-slate-700 no-print">
-                <button id="tab-overview" class="page-tab active" data-page="page-overview">Visão Geral por Período</button>
-                <button id="tab-comparative" class="page-tab" data-page="page-comparative">Comparativo por Técnico</button>
-                <button id="tab-ranking" class="page-tab" data-page="page-ranking">Ranking Geral</button>
+            <!-- Abas de Navegação (Responsivo) -->
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 border-b border-slate-700 no-print w-full mt-6 md:mt-0 md:w-auto">
+                <button id="tab-overview" class="page-tab active" data-page="page-overview">Visão Geral</button>
+                <button id="tab-comparative" class="page-tab" data-page="page-comparative">Comparativo</button>
+                <button id="tab-ranking" class="page-tab" data-page="page-ranking">Ranking</button>
             </div>
         </header>
 
         <!-- Página 1: Visão Geral por Período -->
         <div id="page-overview" class="page-content active">
-            <!-- Seletor de Mês e Métricas Chave -->
+            <!-- Seletor de Mês e Métricas Chave (Responsivo) -->
             <section class="mb-8 print-break-inside-avoid">
-                <!-- Seletor de Mês -->
-                <div class="no-print mb-8 flex justify-between items-center">
-                    <h3 class="section-title" style="margin-bottom: 0;">Métricas Chave</h3>
-                    <div class="flex-shrink-0 flex flex-col items-end">
-                        <div class="flex items-center space-x-2">
-                            <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
+                <div class="no-print mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <h3 class="section-title w-full mb-4 sm:mb-0" style="margin-bottom: 0;">Métricas Chave</h3>
+                    <div class="flex-shrink-0 flex flex-col items-start sm:items-end w-full sm:w-auto">
+                        <div class="flex items-center space-x-2 w-full justify-between sm:justify-end">
+                            <label for="month-select" class="text-sm font-medium text-gray-400">Período:</label>
                             <select id="month-select" class="bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="agosto">01/08 a 30/08</option>
                                 <option value="setembro">01/09 a 30/09</option>
@@ -212,7 +211,7 @@
                     <!-- Análise Qualitativa -->
                     <section class="print-break-inside-avoid" id="qualitative-section">
                         <h3 class="section-title" id="qualitative-title">Análise Qualitativa</h3>
-                        <div class="glass-card p-6 rounded-xl">
+                        <div class="glass-card p-4 sm:p-6 rounded-xl">
                             <p class="text-gray-400 text-sm mb-6" id="qualitative-description">
                                 A maioria das notas baixas está associada a fatores externos (falhas massivas) ou solicitações financeiras/comerciais, sugerindo uma oportunidade de otimizar o direcionamento.
                             </p>
@@ -237,7 +236,7 @@
                     <!-- Motivos de Atendimento -->
                     <section class="print-break-inside-avoid">
                         <h3 class="section-title">Principais Motivos de Atendimento</h3>
-                        <div class="glass-card p-6 rounded-xl">
+                        <div class="glass-card p-4 sm:p-6 rounded-xl">
                             <div class="space-y-4" id="reasons-table">
                                 <!-- Linhas da tabela serão inseridas aqui -->
                             </div>
@@ -246,7 +245,7 @@
                     <!-- Gráfico de Desempenho -->
                     <section class="print-break-inside-avoid">
                         <h3 class="section-title" id="chart-title">Desempenho da Equipe</h3>
-                        <div class="glass-card p-6 rounded-xl h-[450px]">
+                        <div class="glass-card p-4 sm:p-6 rounded-xl h-[450px]">
                             <canvas id="performanceChart"></canvas>
                         </div>
                     </section>
@@ -266,7 +265,7 @@
         <div id="page-ranking" class="page-content no-print">
             <h3 class="section-title">Ranking Geral de Atendentes</h3>
             <p class="text-sm text-slate-400 mb-6">O ranking é calculado com base na Nota Média Ponderada (principal), Menor Qtd. de Notas Baixas, Maior Nº de Ativações e Menor TMA Ponderado, de todos os períodos combinados.</p>
-            <div id="ranking-table-container" class="glass-card p-6 rounded-xl overflow-x-auto">
+            <div id="ranking-table-container" class="glass-card p-4 sm:p-6 rounded-xl overflow-x-auto">
                 <!-- A tabela será gerada pelo JS -->
             </div>
         </div>
@@ -539,12 +538,12 @@
                     periodLabel: '01/11 a 10/11',
                     team: [
                         { nome: 'Pedro', chat: 33, atendimentos: 3, os: 8, nota: 3.82, tma: 101, ativacoes: 0 },
-                        { nome: 'Vinicius', chat: 97, atendimentos: 20, os: 6, nota: 4.32, tma: 56, ativacoes: 0 },
+                        { nome: 'Vinicius', chat: 97, atendimentos: 20, os: 6, nota: 4.32, tma: 56, ativacoes: 7 },
                         { nome: 'Paulo', chat: 107, atendimentos: 0, os: 7, nota: 4.39, tma: 43, ativacoes: 0 }, // PDF não informou atendimentos
-                        { nome: 'Ricardo (12x36)', chat: 108, atendimentos: 45, os: 2, nota: 4.73, tma: 32, ativacoes: 0 },
-                        { nome: 'Matheus (12x36)', chat: 133, atendimentos: 30, os: 4, nota: 4.78, tma: 23, ativacoes: 0 },
-                        { nome: 'Robson (12x36)', chat: 207, atendimentos: 115, os: 6, nota: 4.78, tma: 14, ativacoes: 0 },
-                        { nome: 'Leonardo (12x36)', chat: 117, atendimentos: 36, os: 1, nota: 4.42, tma: 23, ativacoes: 0 } // Corrigido de 442
+                        { nome: 'Ricardo (12x36)', chat: 108, atendimentos: 45, os: 2, nota: 4.73, tma: 32, ativacoes: 1 },
+                        { nome: 'Matheus (12x36)', chat: 133, atendimentos: 30, os: 4, nota: 4.78, tma: 23, ativacoes: 5 },
+                        { nome: 'Robson (12x36)', chat: 207, atendimentos: 115, os: 6, nota: 4.78, tma: 14, ativacoes: 11 },
+                        { nome: 'Leonardo (12x36)', chat: 117, atendimentos: 36, os: 1, nota: 4.42, tma: 23, ativacoes: 4 } // Corrigido de 442
                     ],
                     reasons: { 
                         'Sem internet/Visita': 34,
@@ -636,18 +635,20 @@
             };
 
             /**
-             * Função para "limpar" um texto para ser usado como ID HTML
+             * Função para "limpar" um texto para ser usado como ID HTML (CORRIGIDA)
              * @param {string} text - O texto a ser limpo
              * @returns {string} - O texto seguro para ID
              */
             function slugify(text) {
                 if (typeof text !== 'string') return '';
-                return text.toString().toLowerCase()
+                // Prefixa para garantir que não comece com número e remove caracteres problemáticos
+                const slug = text.toString().toLowerCase()
                     .replace(/\s+/g, '-')           // Substitui espaços por -
-                    .replace(/[^\w\-]+/g, '')       // Remove caracteres não-alfanuméricos (exceto -)
-                    .replace(/\-\-+/g, '-')         // Substitui múltiplos - por um único -
-                    .replace(/^-+/, '')             // Remove - do início
-                    .replace(/-+$/, '');            // Remove - do fim
+                    .replace(/[^a-z0-9\-]/g, '')   // Remove TUDO exceto letras minúsculas, números, hífens
+                    .replace(/\-\-+/g, '-')         // Limpa hífens duplicados
+                    .replace(/^-+/, '')
+                    .replace(/-+$/, '');
+                return `chart-attendant-${slug}`; // Retorna um ID prefixado e seguro
             }
 
             /**
@@ -1042,7 +1043,7 @@
             }
 
 
-            // --- Lógica da Página Comparativa (MODIFICADA) ---
+            // --- Lógica da Página Comparativa (CORRIGIDA) ---
 
             /**
              * Constrói a visualização comparativa (Página 2)
@@ -1107,12 +1108,12 @@
                 // 3. Gerar o HTML para os gráficos
                 let html = '';
                 Object.keys(attendantData).sort().forEach(attendantKey => {
-                    const slug = slugify(attendantKey);
+                    const chartId = slugify(attendantKey); // Gera o ID seguro e prefixado
                     html += `
-                        <div class="glass-card p-6 rounded-xl">
+                        <div class="glass-card p-4 sm:p-6 rounded-xl">
                             <h4 class="font-bold text-lg text-white mb-4">${attendantKey}</h4>
                             <div class="h-[300px]">
-                                <canvas id="chart-attendant-${slug}"></canvas>
+                                <canvas id="${chartId}"></canvas>
                             </div>
                         </div>
                     `;
@@ -1121,12 +1122,12 @@
 
                 // 4. Criar as instâncias do Chart.js
                 for (const attendantKey in attendantData) {
-                    const slug = slugify(attendantKey);
+                    const chartId = slugify(attendantKey); // Gera o *mesmo* ID seguro
                     const data = attendantData[attendantKey];
-                    const ctx = document.getElementById(`chart-attendant-${slug}`);
+                    const ctx = document.getElementById(chartId); // Busca pelo ID seguro
                     
                     if (!ctx) {
-                        console.error(`Canvas não encontrado para: chart-attendant-${slug}`);
+                        console.error(`Canvas não encontrado para: ${chartId}`);
                         continue;
                     }
 
@@ -1287,7 +1288,7 @@
                                 <th scope="col" class="px-4 py-3 text-center">Nota Média Ponderada</th>
                                 <th scope="col" class="px-4 py-3 text-center">Total de Notas Baixas</th>
                                 <th scope="col" class="px-4 py-3 text-center">Total de Ativações</th>
-                                <th scope="col" class="px-4 py-3 text-center">TMA Médio Ponderado</th>
+                                <th scope="col" class="px-4 py-3 text-center">TMA Média Ponderado</th>
                                 <th scope="col" class="px-4 py-3 text-center">Total de Chats</th>
                             </tr>
                         </thead>
