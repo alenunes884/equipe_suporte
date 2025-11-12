@@ -38,7 +38,7 @@
                 box-shadow: none !important;
             }
             /* Reset de cores para impressão */
-            .max-w-5xl { background-color: #ffffff !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            .max-w-7xl { background-color: #ffffff !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
             h1, h2, h3, h4, .text-slate-900, .text-slate-800, .text-slate-700, .text-slate-600 { color: #333333 !important; }
             .border-b, .border-t, .border, .border-l-4 { border-color: #e2e8f0 !important; }
             .bg-slate-50 { background-color: #f8fafc !important; border-color: #e2e8f0 !important; }
@@ -136,96 +136,131 @@
             ring-color: #0093d5; /* Azul do logo */
             border-color: #0093d5; /* Azul do logo */
         }
+
+        /* Estilos das Abas */
+        .page-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #94a3b8; /* text-slate-400 */
+            transition: all 0.3s ease;
+        }
+        .page-tab:hover {
+            color: #e2e8f0; /* text-slate-200 */
+        }
+        .page-tab.active {
+            color: #0093d5; /* Azul do logo */
+            border-bottom-color: #0093d5;
+        }
+        .page-content {
+            display: none; /* Oculto por padrão */
+        }
+        .page-content.active {
+            display: block; /* Visível quando ativo */
+        }
+
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-10">
     <div class="max-w-7xl mx-auto bg-slate-900/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 relative border border-slate-700">
         
-        <!-- Seletor de Mês -->
-        <div class="no-print mb-8 flex justify-between items-center">
+        <!-- Cabeçalho Principal -->
+        <header class="mb-8 flex justify-between items-center">
             <div class="text-left">
                 <h1 class="text-3xl md:text-4xl font-extrabold text-white">Relatório de Desempenho</h1>
                 <h2 class="text-xl font-semibold gradient-text mt-1">Equipe de Suporte Técnico</h2>
             </div>
-            <div class="flex-shrink-0 flex flex-col items-end">
-                <div class="flex items-center space-x-2">
-                    <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
-                    <select id="month-select" class="bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="agosto">01/08 a 30/08</option>
-                        <option value="setembro">01/09 a 30/09</option>
-                        <option value="outubro">01/10 a 24/10</option>
-                        <option value="outubro-nov">24/10 a 04/11</option>
-                        <option value="novembro-inicio" selected>01/11 a 10/11</option>
-                    </select>
+            <!-- Abas de Navegação -->
+            <div class="flex space-x-4 border-b border-slate-700 no-print">
+                <button id="tab-overview" class="page-tab active" data-page="page-overview">Visão Geral por Período</button>
+                <button id="tab-comparative" class="page-tab" data-page="page-comparative">Comparativo por Técnico</button>
+            </div>
+        </header>
+
+        <!-- Página 1: Visão Geral por Período -->
+        <div id="page-overview" class="page-content active">
+            <!-- Seletor de Mês e Métricas Chave -->
+            <section class="mb-8 print-break-inside-avoid">
+                <!-- Seletor de Mês -->
+                <div class="no-print mb-8 flex justify-between items-center">
+                    <h3 class="section-title" style="margin-bottom: 0;">Métricas Chave</h3>
+                    <div class="flex-shrink-0 flex flex-col items-end">
+                        <div class="flex items-center space-x-2">
+                            <label for="month-select" class="text-sm font-medium text-gray-400">Selecione o período:</label>
+                            <select id="month-select" class="bg-slate-800/60 border border-slate-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="agosto">01/08 a 30/08</option>
+                                <option value="setembro">01/09 a 30/09</option>
+                                <option value="outubro">01/10 a 24/10</option>
+                                <option value="outubro-nov">24/10 a 04/11</option>
+                                <option value="novembro-inicio" selected>01/11 a 10/11</option>
+                            </select>
+                        </div>
+                        <p class="text-md text-gray-400 mt-2" id="period-text">01/11 a 10/11</p>
+                    </div>
                 </div>
-                <p class="text-md text-gray-400 mt-2" id="period-text">01/11 a 10/11</p>
-            </div>
-        </div>
 
-        <!-- Métricas Chave -->
-        <section class="mb-8 print-break-inside-avoid">
-            <h3 class="section-title">Métricas Chave</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center" id="key-metrics">
-                <!-- Métricas serão inseridas aqui dinamicamente -->
-            </div>
-        </section>
-        
-        <!-- Layout Principal em Grid -->
-        <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center" id="key-metrics">
+                    <!-- Métricas serão inseridas aqui dinamicamente -->
+                </div>
+            </section>
             
-            <!-- Coluna Principal (2/3) -->
-            <div class="lg:col-span-2 space-y-6">
-                
-                <!-- Análise Qualitativa -->
-                <section class="print-break-inside-avoid" id="qualitative-section">
-                    <h3 class="section-title" id="qualitative-title">Análise Qualitativa</h3>
-                    <div class="glass-card p-6 rounded-xl">
-                        <p class="text-gray-400 text-sm mb-6" id="qualitative-description">
-                            A maioria das notas baixas está associada a fatores externos (falhas massivas) ou solicitações financeiras/comerciais, sugerindo uma oportunidade de otimizar o direcionamento.
-                        </p>
-                        <div class="h-[350px] mb-6" id="low-scores-chart-container">
-                            <canvas id="lowScoresChart"></canvas>
+            <!-- Layout Principal em Grid -->
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Coluna Principal (2/3) -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Análise Qualitativa -->
+                    <section class="print-break-inside-avoid" id="qualitative-section">
+                        <h3 class="section-title" id="qualitative-title">Análise Qualitativa</h3>
+                        <div class="glass-card p-6 rounded-xl">
+                            <p class="text-gray-400 text-sm mb-6" id="qualitative-description">
+                                A maioria das notas baixas está associada a fatores externos (falhas massivas) ou solicitações financeiras/comerciais, sugerindo uma oportunidade de otimizar o direcionamento.
+                            </p>
+                            <div class="h-[350px] mb-6" id="low-scores-chart-container">
+                                <canvas id="lowScoresChart"></canvas>
+                            </div>
+                            <div id="low-scores-analysis" class="space-y-3">
+                                <!-- Detalhes das notas baixas serão inseridos aqui -->
+                            </div>
                         </div>
-                        <div id="low-scores-analysis" class="space-y-3">
-                            <!-- Detalhes das notas baixas serão inseridos aqui -->
+                    </section>
+                    <!-- Desempenho Individual -->
+                    <section class="print-break-inside-avoid">
+                        <h3 class="section-title">Desempenho por Atendente</h3>
+                        <div id="team-performance" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Cards de atendentes serão inseridos aqui -->
                         </div>
-                    </div>
-                </section>
-
-                <!-- Desempenho Individual -->
-                <section class="print-break-inside-avoid">
-                    <h3 class="section-title">Desempenho por Atendente</h3>
-                    <div id="team-performance" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Cards de atendentes serão inseridos aqui -->
-                    </div>
-                </section>
-
+                    </section>
+                </div>
+                <!-- Barra Lateral (1/3) -->
+                <div class="lg:col-span-1 space-y-6">
+                    <!-- Motivos de Atendimento -->
+                    <section class="print-break-inside-avoid">
+                        <h3 class="section-title">Principais Motivos de Atendimento</h3>
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="space-y-4" id="reasons-table">
+                                <!-- Linhas da tabela serão inseridas aqui -->
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Gráfico de Desempenho -->
+                    <section class="print-break-inside-avoid">
+                        <h3 class="section-title" id="chart-title">Desempenho da Equipe</h3>
+                        <div class="glass-card p-6 rounded-xl h-[450px]">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </section>
+                </div>
             </div>
-
-            <!-- Barra Lateral (1/3) -->
-            <div class="lg:col-span-1 space-y-6">
-
-                <!-- Motivos de Atendimento -->
-                <section class="print-break-inside-avoid">
-                    <h3 class="section-title">Principais Motivos de Atendimento</h3>
-                    <div class="glass-card p-6 rounded-xl">
-                        <div class="space-y-4" id="reasons-table">
-                            <!-- Linhas da tabela serão inseridas aqui -->
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Gráfico de Desempenho -->
-                <section class="print-break-inside-avoid">
-                    <h3 class="section-title" id="chart-title">Desempenho da Equipe</h3>
-                    <div class="glass-card p-6 rounded-xl h-[450px]">
-                        <canvas id="performanceChart"></canvas>
-                    </div>
-                </section>
-
-            </div>
-
         </div>
+
+        <!-- Página 2: Comparativo por Técnico -->
+        <div id="page-comparative" class="page-content no-print">
+            <h3 class="section-title">Evolução de Notas Baixas por Técnico</h3>
+            <div id="comparative-charts-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <!-- Gráficos comparativos serão inseridos aqui -->
+            </div>
+        </div>
+
 
         <footer class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-slate-700">
             Relatório gerado em <span id="generation-date"></span> para Internet Mais.
@@ -240,7 +275,6 @@
             document.getElementById('generation-date').textContent = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
             
             // Dados organizados por mês
-            // Adicionado 'periodLabel' para centralizar a informação do período.
             const monthlyData = {
                 agosto: {
                     periodLabel: '01/08 a 30/08',
@@ -297,46 +331,46 @@
                     },
                     lowScores: {
                         'Robson (12x36)': [
-                            { nota: 1, count: 2, motivos: 'Questões financeiras (liberação de confiança negada).' },
-                            { nota: 2, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                            { nota: 3, count: 1, motivos: 'Cliente solicitando agendamento.' },
-                            { nota: 4, count: 21, motivos: 'Internet lenta, Sem conexão, Desbloqueio de confiança, Solicitação de contratação.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 21}
                         ],
                         'Matheus (12x36)': [
-                            { nota: 1, count: 10, motivos: 'Solicitação de contratação, Falha massiva, Contatos encerrados por inatividade.' },
-                            { nota: 2, count: 3, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                            { nota: 3, count: 5, motivos: 'Falha massiva, Desbloqueio de confiança, Solicitação de reativação de link, Contato encerrado por inatividade.' },
-                            { nota: 4, count: 40, motivos: 'Solicitação de contratação, Pedidos de 2ª via de boleto, Desbloqueio de confiança, Relatos de lentidão.' }
+                            { nota: 1, count: 10},
+                            { nota: 2, count: 3},
+                            { nota: 3, count: 5},
+                            { nota: 4, count: 40}
                         ],
                         'Vinicius': [
-                            { nota: 1, count: 1, motivos: 'Cliente sem conexão devido a falha massiva.' },
-                            { nota: 2, count: 1, motivos: 'Cliente com internet lenta.' },
-                            { nota: 3, count: 3, motivos: 'Cliente sem conexão devido a falha massiva na região.' },
-                            { nota: 4, count: 17, motivos: 'Internet lenta, Rompimento de fibra, Solicitação de ativação de link.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 17}
                         ],
                         'Ricardo (12x36)': [
-                            { nota: 1, count: 9, motivos: 'Clientes impactados por falha massiva, Clientes com bloqueio financeiro.' },
-                            { nota: 2, count: 2, motivos: 'Solicitação de horário de visita, Pedido de contratação.' },
-                            { nota: 3, count: 3, motivos: 'Internet lenta, Cliente sem conexão devido a falha massiva.' },
-                            { nota: 4, count: 29, motivos: 'Configuração de aplicativo, Rompimento de fibra, Solicitação de suporte financeiro.' }
+                            { nota: 1, count: 9},
+                            { nota: 2, count: 2},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 29}
                         ],
                         'Leonardo (12x36)': [
-                            { nota: 1, count: 8, motivos: 'Falha massiva, Contatos encerrados por falta de comunicação, Pedidos de desbloqueio de confiança.' },
-                            { nota: 2, count: 4, motivos: 'Falha massiva, Redução de velocidade, Internet lenta.' },
-                            { nota: 3, count: 9, motivos: 'Falha massiva, Internet lenta, Rompimento de fibra.' },
-                            { nota: 4, count: 27, motivos: 'Falha massiva, Rompimento de fibra, Desbloqueio de confiança, Internet lenta, Pedidos de contratação.' }
+                            { nota: 1, count: 8},
+                            { nota: 2, count: 4},
+                            { nota: 3, count: 9},
+                            { nota: 4, count: 27}
                         ],
                         'Paulo': [
-                            { nota: 1, count: 6, motivos: 'Internet lenta, Falha massiva, Rompimento de fibra.' },
-                            { nota: 2, count: 1, motivos: 'Cliente sem conexão.' },
-                            { nota: 3, count: 4, motivos: 'Falha massiva, Cliente sem internet.' },
-                            { nota: 4, count: 19, motivos: 'Falha massiva, Internet lenta, Agendamento, Rompimento de fibra, Ativação de aplicativo.' }
+                            { nota: 1, count: 6},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 4},
+                            { nota: 4, count: 19}
                         ],
                         'Pedro': [
-                            { nota: 1, count: 9, motivos: 'Falha massiva, Solicitação de agendamento.' },
-                            { nota: 2, count: 3, motivos: 'Falha massiva, Lentidão, Contato encerrado por inatividade.' },
-                            { nota: 3, count: 5, motivos: 'Falha massiva, Solicitação de agendamento.' },
-                            { nota: 4, count: 23, motivos: 'Falha massiva, Cliente sem internet, Internet lenta, Ativação de aplicativos, Solicitação de agendamento.' }
+                            { nota: 1, count: 9},
+                            { nota: 2, count: 3},
+                            { nota: 3, count: 5},
+                            { nota: 4, count: 23}
                         ]
                     },
                     keyMetrics: {
@@ -370,46 +404,46 @@
                     },
                     lowScores: {
                         'Pedro': [
-                            { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 5, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 3},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 5},
+                            { nota: 4, count: 7}
                         ],
                         'Vinicius': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 7, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 2},
+                            { nota: 4, count: 7}
                         ],
                         'Robson (12x36)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 11}
                         ],
                         'Leonardo (12x36)': [
-                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 2},
+                            { nota: 3, count: 4},
+                            { nota: 4, count: 11}
                         ],
                         'Matheus (12x36)': [
-                            { nota: 1, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 4, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 11, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 3},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 4},
+                            { nota: 4, count: 11}
                         ],
                         'Paulo': [
-                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 3, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 16}
                         ],
                         'Ricardo (12x36)': [
-                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 16, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 16}
                         ]
                     },
                     keyMetrics: {
@@ -443,46 +477,46 @@
                     },
                     lowScores: {
                         'Pedro': [
-                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 3, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 3}
                         ],
                         'Vinicius': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 3, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 4, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 2},
+                            { nota: 4, count: 4}
                         ],
                         'Robson (12x36)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 6, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 6}
                         ],
                         'Leonardo (12x36)': [
-                            { nota: 1, count: 2, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 9, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 9}
                         ],
                         'Matheus (12x36)': [
-                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 6, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 6}
                         ],
                         'Paulo': [
-                            { nota: 1, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 8, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 8}
                         ],
                         'Ricardo (12x36)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos de atendimento.' },
-                            { nota: 4, count: 5, motivos: 'Motivos diversos de atendimento.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 5}
                         ]
                     },
                     keyMetrics: {
@@ -499,64 +533,63 @@
                         { nome: 'Paulo', chat: 107, atendimentos: 0, os: 7, nota: 4.39, tma: 43, ativacoes: 0 }, // PDF não informou atendimentos
                         { nome: 'Ricardo (12x36)', chat: 108, atendimentos: 45, os: 2, nota: 4.73, tma: 32, ativacoes: 0 },
                         { nome: 'Matheus (12x36)', chat: 133, atendimentos: 30, os: 4, nota: 4.78, tma: 23, ativacoes: 0 },
-                        { nome: 'Robson (12x38)', chat: 207, atendimentos: 115, os: 6, nota: 4.78, tma: 14, ativacoes: 0 },
+                        { nome: 'Robson (12x36)', chat: 207, atendimentos: 115, os: 6, nota: 4.78, tma: 14, ativacoes: 0 },
                         { nome: 'Leonardo (12x36)', chat: 117, atendimentos: 36, os: 1, nota: 4.42, tma: 23, ativacoes: 0 } // Corrigido de 442
                     ],
                     reasons: { 
-                        // PDF não forneceu valores para os motivos
-                        'Sem internet/Visita': 0,
-                        'Sem Internet/Resolvido': 0, 
-                        'Internet Lenta Resolvido': 0,
-                        'Internet Lenta/Visita': 0, 
-                        'Rompimento de fibra': 0,
-                        'Falha Massiva': 0,
-                        'Inatividade do cliente': 0, 
-                        'Assuntos Financeiros': 0, 
-                        'Assuntos Comerciais': 0,
-                        'Agendamento': 0
+                        'Sem internet/Visita': 34,
+                        'Sem Internet/Resolvido': 87, 
+                        'Internet Lenta/Resolvido': 40,
+                        'Internet Lenta/Visita': 26, 
+                        'Rompimento de fibra': 66,
+                        'Falha Massiva': 89,
+                        'Inatividade do cliente': 63, 
+                        'Assuntos Financeiros': 172, 
+                        'Assuntos Comerciais': 11,
+                        'Agendamento': 31
                     },
                     lowScores: {
                         'Pedro': [
-                            { nota: 1, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 3, count: 2, motivos: 'Motivos diversos.' },
-                            { nota: 4, count: 2, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 2},
+                            { nota: 4, count: 2}
                         ],
                         'Vinicius': [
-                            { nota: 1, count: 2, motivos: 'Motivos diversos.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 4, count: 4, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 2},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 4}
                         ],
-                        'Robson (12x38)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 11, motivos: 'Motivos diversos.' }
+                        'Robson (12x36)': [
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 11}
                         ],
                         'Leonardo (12x36)': [
-                            { nota: 1, count: 4, motivos: 'Motivos diversos.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 9, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 4},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 9}
                         ],
                         'Matheus (12x36)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 4, count: 9, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 9}
                         ],
                         'Paulo': [
-                            { nota: 1, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
-                            { nota: 3, count: 4, motivos: 'Motivos diversos.' },
-                            { nota: 4, count: 7, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 4},
+                            { nota: 4, count: 7}
                         ],
                         'Ricardo (12x36)': [
-                            { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
-                            { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 3, motivos: 'Motivos diversos.' },
-                            { nota: 4, count: 7, motivos: 'Motivos diversos.' }
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 7}
                         ]
                     },
                     keyMetrics: {
@@ -570,6 +603,7 @@
             // Variáveis para armazenar as instâncias dos gráficos
             let performanceChart = null;
             let lowScoresChart = null;
+            let comparativeCharts = {}; // Objeto para guardar os gráficos comparativos
 
             // Ícones para os cards de atendentes (mantidos os azuis para contraste)
             const icons = {
@@ -592,11 +626,30 @@
             };
 
             /**
+             * Função para "limpar" um texto para ser usado como ID HTML
+             * @param {string} text - O texto a ser limpo
+             * @returns {string} - O texto seguro para ID
+             */
+            function slugify(text) {
+                if (typeof text !== 'string') return '';
+                return text.toString().toLowerCase()
+                    .replace(/\s+/g, '-')           // Substitui espaços por -
+                    .replace(/[^\w\-]+/g, '')       // Remove caracteres não-alfanuméricos (exceto -)
+                    .replace(/\-\-+/g, '-')         // Substitui múltiplos - por um único -
+                    .replace(/^-+/, '')             // Remove - do início
+                    .replace(/-+$/, '');            // Remove - do fim
+            }
+
+            /**
              * Função principal para atualizar todo o relatório com base no mês selecionado.
              * @param {string} selectedMonth - A chave do mês (ex: 'agosto', 'setembro').
              */
             function updateReport(selectedMonth) {
                 const data = monthlyData[selectedMonth];
+                if (!data) {
+                    console.error("Dados não encontrados para o mês:", selectedMonth);
+                    return;
+                }
                 
                 // Atualizar título do período (agora vindo do objeto de dados)
                 document.getElementById('period-text').textContent = data.periodLabel;
@@ -646,9 +699,6 @@
                 }
                 
                 const labels = data.team.map(m => m.nome);
-                
-                // Atualizar título do gráfico
-                document.getElementById('chart-title').textContent = 'Desempenho da Equipe';
                 
                 performanceChart = new Chart(ctx, {
                     type: 'bar',
@@ -801,6 +851,8 @@
                 allReasons.sort((a, b) => reasons[b] - reasons[a]);
                 
                 let hasReasons = false;
+                const maxValue = Math.max(...Object.values(reasons));
+
                 allReasons.forEach(reason => {
                     const count = reasons[reason];
                     
@@ -808,7 +860,6 @@
                     if (count === 0) return; 
                     
                     hasReasons = true;
-                    const maxValue = Math.max(...Object.values(reasons)); // Recalcula max aqui para ser justo
                     const barWidth = maxValue > 0 ? (count / maxValue) * 100 : 0;
                     
                     const rowHTML = `
@@ -872,6 +923,7 @@
                         let detailsHTML = '';
                         
                         details.forEach(detail => {
+                            if (detail.count === 0) return; // Não mostrar notas com 0 ocorrências
                             const colors = getScoreColors(detail.nota); // Usa a função auxiliar
                             detailsHTML += `
                                 <div class="p-4 rounded-lg ring-1 ${colors.ring} ${colors.bg}">
@@ -882,7 +934,7 @@
 
                         const attendantHTML = `
                             <details class="glass-card bg-slate-800/60 border border-slate-700 rounded-lg overflow-hidden">
-                                <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-white hover:bg-slate-700 transition-colors">
+                                <summary class="p-4 cursor-pointer flex justify-between items-center font-semibold text-white hover:bg-slate-700/60 transition-colors">
                                     ${attendant}
                                     <svg class="w-5 h-5 text-gray-400 transition-transform transform arrow-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -979,14 +1031,213 @@
                 });
             }
 
+
+            // --- Lógica da Página Comparativa (MODIFICADA) ---
+
+            /**
+             * Constrói a visualização comparativa (Página 2)
+             * AGORA MOSTRA A EVOLUÇÃO DE NOTAS BAIXAS (1, 2, 3, 4)
+             */
+            function buildComparativeView() {
+                const comparativeContainer = document.getElementById('comparative-charts-container');
+                if (!comparativeContainer) return;
+
+                // 1. Coletar dados de todos os atendentes
+                let attendantData = {};
+                let periodKeys = Object.keys(monthlyData); // ['agosto', 'setembro', ...]
+
+                // Encontrar todos os nomes únicos de atendentes
+                let allAttendantNames = new Set();
+                periodKeys.forEach(key => {
+                    monthlyData[key].team.forEach(member => {
+                        allAttendantNames.add(member.nome);
+                    });
+                });
+
+                // 2. Estruturar os dados por atendente
+                allAttendantNames.forEach(name => {
+                    let attendantKey = name;
+                    
+                    attendantData[attendantKey] = {
+                        name: attendantKey,
+                        labels: [],
+                        nota1Counts: [],
+                        nota2Counts: [],
+                        nota3Counts: [],
+                        nota4Counts: []
+                    };
+
+                    // Preencher dados de cada período
+                    periodKeys.forEach(key => {
+                        const periodLabel = monthlyData[key].periodLabel;
+                        const periodLowScores = monthlyData[key].lowScores;
+                        
+                        attendantData[attendantKey].labels.push(periodLabel);
+                        
+                        let memberLowScores = null;
+                        if (periodLowScores && periodLowScores[attendantKey]) {
+                            memberLowScores = periodLowScores[attendantKey];
+                        }
+
+                        if (memberLowScores) {
+                            attendantData[attendantKey].nota1Counts.push(memberLowScores.find(d => d.nota === 1)?.count || 0);
+                            attendantData[attendantKey].nota2Counts.push(memberLowScores.find(d => d.nota === 2)?.count || 0);
+                            attendantData[attendantKey].nota3Counts.push(memberLowScores.find(d => d.nota === 3)?.count || 0);
+                            attendantData[attendantKey].nota4Counts.push(memberLowScores.find(d => d.nota === 4)?.count || 0);
+                        } else {
+                            // Se não houver dados de notas baixas (ex: Agosto)
+                            attendantData[attendantKey].nota1Counts.push(0);
+                            attendantData[attendantKey].nota2Counts.push(0);
+                            attendantData[attendantKey].nota3Counts.push(0);
+                            attendantData[attendantKey].nota4Counts.push(0);
+                        }
+                    });
+                });
+
+                // 3. Gerar o HTML para os gráficos
+                let html = '';
+                Object.keys(attendantData).sort().forEach(attendantKey => {
+                    const slug = slugify(attendantKey);
+                    html += `
+                        <div class="glass-card p-6 rounded-xl">
+                            <h4 class="font-bold text-lg text-white mb-4">${attendantKey}</h4>
+                            <div class="h-[300px]">
+                                <canvas id="chart-attendant-${slug}"></canvas>
+                            </div>
+                        </div>
+                    `;
+                });
+                comparativeContainer.innerHTML = html;
+
+                // 4. Criar as instâncias do Chart.js
+                for (const attendantKey in attendantData) {
+                    const slug = slugify(attendantKey);
+                    const data = attendantData[attendantKey];
+                    const ctx = document.getElementById(`chart-attendant-${slug}`);
+                    
+                    if (!ctx) {
+                        console.error(`Canvas não encontrado para: chart-attendant-${slug}`);
+                        continue;
+                    }
+
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: 'Nota 1',
+                                    data: data.nota1Counts,
+                                    backgroundColor: 'rgba(220, 38, 38, 0.8)', // Vermelho
+                                },
+                                {
+                                    label: 'Nota 2',
+                                    data: data.nota2Counts,
+                                    backgroundColor: 'rgba(245, 158, 11, 0.8)', // Laranja
+                                },
+                                {
+                                    label: 'Nota 3',
+                                    data: data.nota3Counts,
+                                    backgroundColor: 'rgba(234, 179, 8, 0.8)', // Amarelo
+                                },
+                                {
+                                    label: 'Nota 4',
+                                    data: data.nota4Counts,
+                                    backgroundColor: 'rgba(59, 130, 246, 0.8)', // Azul
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            scales: {
+                                x: {
+                                    stacked: true, // Empilhar no eixo X
+                                    ticks: { color: '#cbd5e1' },
+                                    grid: { color: '#334155' }
+                                },
+                                y: {
+                                    stacked: true, // Empilhar no eixo Y
+                                    display: true,
+                                    position: 'left',
+                                    title: { display: true, text: 'Qtd. de Notas Baixas', color: '#e2e8f0', font: {weight: 'bold'} },
+                                    ticks: { color: '#cbd5e1' },
+                                    grid: { color: '#334155' },
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#e2e8f0' }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            if (label) { label += ': '; }
+                                            if (context.parsed.y !== null) {
+                                                label += context.parsed.y;
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // --- Lógica das Abas ---
+
+            /**
+             * Alterna entre as páginas de visualização.
+             * @param {string} pageId - O ID da página de conteúdo a ser mostrada (ex: 'page-overview').
+             */
+            function switchPage(pageId) {
+                // Esconde todos os conteúdos
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.classList.remove('active');
+                });
+                // Desativa todas as abas
+                document.querySelectorAll('.page-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Mostra o conteúdo da página selecionada
+                const contentToShow = document.getElementById(pageId);
+                if (contentToShow) {
+                    contentToShow.classList.add('active');
+                }
+                
+                // Ativa a aba correspondente
+                const tabToActivate = document.querySelector(`.page-tab[data-page="${pageId}"]`);
+                if (tabToActivate) {
+                    tabToActivate.classList.add('active');
+                }
+            }
+
             // --- Inicialização ---
 
-            // Inicializar o relatório com outubro selecionado
+            // Inicializar a "Visão Geral" com o período mais recente
             updateReport('novembro-inicio');
             
+            // Construir a "Página Comparativa" (só precisa ser feito uma vez)
+            buildComparativeView();
+
             // Adicionar evento de mudança no seletor de mês
             document.getElementById('month-select').addEventListener('change', function() {
                 updateReport(this.value);
+            });
+
+            // Adicionar eventos de clique nas abas
+            document.querySelectorAll('.page-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchPage(this.dataset.page);
+                });
             });
 
         }); // Fim do DOMContentLoaded
