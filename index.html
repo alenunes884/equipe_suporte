@@ -174,6 +174,7 @@
             <div class="flex space-x-4 border-b border-slate-700 no-print">
                 <button id="tab-overview" class="page-tab active" data-page="page-overview">Visão Geral por Período</button>
                 <button id="tab-comparative" class="page-tab" data-page="page-comparative">Comparativo por Técnico</button>
+                <button id="tab-ranking" class="page-tab" data-page="page-ranking">Ranking Geral</button>
             </div>
         </header>
 
@@ -258,6 +259,15 @@
             <h3 class="section-title">Evolução de Notas Baixas por Técnico</h3>
             <div id="comparative-charts-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 <!-- Gráficos comparativos serão inseridos aqui -->
+            </div>
+        </div>
+
+        <!-- Página 3: Ranking Geral -->
+        <div id="page-ranking" class="page-content no-print">
+            <h3 class="section-title">Ranking Geral de Atendentes</h3>
+            <p class="text-sm text-slate-400 mb-6">O ranking é calculado com base na Nota Média Ponderada (principal), Menor Qtd. de Notas Baixas, Maior Nº de Ativações e Menor TMA Ponderado, de todos os períodos combinados.</p>
+            <div id="ranking-table-container" class="glass-card p-6 rounded-xl overflow-x-auto">
+                <!-- A tabela será gerada pelo JS -->
             </div>
         </div>
 
@@ -1036,7 +1046,7 @@
 
             /**
              * Constrói a visualização comparativa (Página 2)
-             * AGORA MOSTRA A EVOLUÇÃO DE NOTAS BAIXAS (1, 2, 3, 4)
+             * MOSTRA A EVOLUÇÃO DE NOTAS BAIXAS (1, 2, 3, 4)
              */
             function buildComparativeView() {
                 const comparativeContainer = document.getElementById('comparative-charts-container');
@@ -1190,6 +1200,121 @@
                     });
                 }
             }
+
+            /**
+             * Constrói a tabela de ranking geral (Página 3)
+             */
+            function buildRankingPage() {
+                const container = document.getElementById('ranking-table-container');
+                if (!container) return;
+
+                let attendantData = {};
+                let periodKeys = Object.keys(monthlyData);
+
+                // 1. Encontrar todos os nomes únicos
+                let allAttendantNames = new Set();
+                periodKeys.forEach(key => {
+                    monthlyData[key].team.forEach(member => {
+                        allAttendantNames.add(member.nome);
+                    });
+                });
+
+                // 2. Agregar dados de todos os períodos
+                allAttendantNames.forEach(name => {
+                    let stats = {
+                        nome: name,
+                        totalChats: 0,
+                        totalScorePoints: 0,
+                        totalTmaPoints: 0,
+                        totalAtivacoes: 0,
+                        totalLowScores: 0,
+                        periodsWorked: 0
+                    };
+
+                    periodKeys.forEach(key => {
+                        const period = monthlyData[key];
+                        const memberData = period.team.find(m => m.nome === name);
+
+                        if (memberData) {
+                            stats.periodsWorked++;
+                            // Usar o volume de chat como peso. Se for 0, usar 1 para não anular a nota.
+                            const chatVolume = memberData.chat > 0 ? memberData.chat : 1; 
+                            stats.totalChats += memberData.chat;
+                            stats.totalScorePoints += memberData.nota * chatVolume;
+                            stats.totalTmaPoints += memberData.tma * chatVolume;
+                            stats.totalAtivacoes += (memberData.ativacoes || 0);
+                        }
+
+                        // Agregar notas baixas
+                        const lowScoresData = (period.lowScores && period.lowScores[name]) ? period.lowScores[name] : [];
+                        lowScoresData.forEach(score => {
+                            if (score.nota >= 1 && score.nota <= 4) {
+                                stats.totalLowScores += score.count;
+                            }
+                        });
+                    });
+
+                    // 3. Calcular médias ponderadas
+                    stats.avgNota = stats.totalChats > 0 ? (stats.totalScorePoints / stats.totalChats) : 0;
+                    stats.avgTma = stats.totalChats > 0 ? (stats.totalTmaPoints / stats.totalChats) : 0;
+                    
+                    attendantData[name] = stats;
+                });
+
+                // 4. Criar lista e ordenar
+                let rankedList = Object.values(attendantData);
+                
+                rankedList.sort((a, b) => {
+                    // 1. Maior Nota Média Ponderada
+                    if (a.avgNota !== b.avgNota) return b.avgNota - a.avgNota;
+                    // 2. Menor Qtd. de Notas Baixas
+                    if (a.totalLowScores !== b.totalLowScores) return a.totalLowScores - b.totalLowScores;
+                    // 3. Maior No. de Ativações
+                    if (a.totalAtivacoes !== b.totalAtivacoes) return b.totalAtivacoes - a.totalAtivacoes;
+                    // 4. Menor TMA Médio Ponderado
+                    if (a.avgTma !== b.avgTma) return a.avgTma - b.avgTma;
+                    // 5. Maior No. de Chats (desempate final)
+                    return b.totalChats - a.totalChats;
+                });
+
+                // 5. Gerar HTML da Tabela
+                let tableHTML = `
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="border-b border-slate-600 text-xs text-slate-400 uppercase">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-center">Rank</th>
+                                <th scope="col" class="px-4 py-3">Atendente</th>
+                                <th scope="col" class="px-4 py-3 text-center">Nota Média Ponderada</th>
+                                <th scope="col" class="px-4 py-3 text-center">Total de Notas Baixas</th>
+                                <th scope="col" class="px-4 py-3 text-center">Total de Ativações</th>
+                                <th scope="col" class="px-4 py-3 text-center">TMA Médio Ponderado</th>
+                                <th scope="col" class="px-4 py-3 text-center">Total de Chats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                rankedList.forEach((stats, index) => {
+                    tableHTML += `
+                        <tr class="border-b border-slate-700 hover:bg-slate-700/50">
+                            <td class="px-4 py-4 font-medium text-lg text-white text-center">${index + 1}</td>
+                            <td class="px-4 py-4 font-medium text-white whitespace-nowrap">${stats.nome}</td>
+                            <td class="px-4 py-4 text-center font-bold text-lg ${stats.avgNota >= 4.5 ? 'text-green-400' : 'text-yellow-400'}">${stats.avgNota.toFixed(2)}</td>
+                            <td class="px-4 py-4 text-center ${stats.totalLowScores <= 20 ? 'text-green-400' : 'text-red-400'}">${stats.totalLowScores}</td>
+                            <td class="px-4 py-4 text-center">${stats.totalAtivacoes}</td>
+                            <td class="px-4 py-4 text-center">${stats.avgTma.toFixed(1)} min</td>
+                            <td class="px-4 py-4 text-center">${stats.totalChats}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHTML += `
+                        </tbody>
+                    </table>
+                `;
+                
+                container.innerHTML = tableHTML;
+            }
             
             // --- Lógica das Abas ---
 
@@ -1227,6 +1352,9 @@
             
             // Construir a "Página Comparativa" (só precisa ser feito uma vez)
             buildComparativeView();
+
+            // Construir a "Página de Ranking" (só precisa ser feito uma vez)
+            buildRankingPage();
 
             // Adicionar evento de mudança no seletor de mês
             document.getElementById('month-select').addEventListener('change', function() {
