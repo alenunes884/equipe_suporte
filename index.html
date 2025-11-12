@@ -517,46 +517,46 @@
                     },
                     lowScores: {
                         'Pedro': [
-                            { nota: 1, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 3, count: 2, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 4, count: 2, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 1, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 3, count: 2, motivos: 'Motivos diversos.' },
+                            { nota: 4, count: 2, motivos: 'Motivos diversos.' }
                         ],
                         'Vinicius': [
-                            { nota: 1, count: 2, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 3, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 4, count: 4, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 1, count: 2, motivos: 'Motivos diversos.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 3, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 4, count: 4, motivos: 'Motivos diversos.' }
                         ],
                         'Robson (12x38)': [
                             { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
                             { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
                             { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 11, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 4, count: 11, motivos: 'Motivos diversos.' }
                         ],
                         'Leonardo (12x36)': [
-                            { nota: 1, count: 4, motivos: 'Motivos de acordo com PDF.' },
+                            { nota: 1, count: 4, motivos: 'Motivos diversos.' },
                             { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
                             { nota: 3, count: 0, motivos: 'Nenhum atendimento com nota 3.' },
-                            { nota: 4, count: 9, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 4, count: 9, motivos: 'Motivos diversos.' }
                         ],
                         'Matheus (12x36)': [
                             { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
                             { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 4, count: 9, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 3, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 4, count: 9, motivos: 'Motivos diversos.' }
                         ],
                         'Paulo': [
-                            { nota: 1, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 2, count: 1, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 3, count: 4, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 4, count: 7, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 1, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 2, count: 1, motivos: 'Motivos diversos.' },
+                            { nota: 3, count: 4, motivos: 'Motivos diversos.' },
+                            { nota: 4, count: 7, motivos: 'Motivos diversos.' }
                         ],
                         'Ricardo (12x36)': [
                             { nota: 1, count: 0, motivos: 'Nenhum atendimento com nota 1.' },
                             { nota: 2, count: 0, motivos: 'Nenhum atendimento com nota 2.' },
-                            { nota: 3, count: 3, motivos: 'Motivos de acordo com PDF.' },
-                            { nota: 4, count: 7, motivos: 'Motivos de acordo com PDF.' }
+                            { nota: 3, count: 3, motivos: 'Motivos diversos.' },
+                            { nota: 4, count: 7, motivos: 'Motivos diversos.' }
                         ]
                     },
                     keyMetrics: {
@@ -796,17 +796,19 @@
                 
                 const reasons = data.reasons;
                 const allReasons = Object.keys(reasons);
-                const maxValue = Math.max(...Object.values(reasons));
                 
                 // Ordena do maior para o menor
                 allReasons.sort((a, b) => reasons[b] - reasons[a]);
                 
+                let hasReasons = false;
                 allReasons.forEach(reason => {
                     const count = reasons[reason];
                     
                     // Não mostrar motivos com zero ocorrências
                     if (count === 0) return; 
                     
+                    hasReasons = true;
+                    const maxValue = Math.max(...Object.values(reasons)); // Recalcula max aqui para ser justo
                     const barWidth = maxValue > 0 ? (count / maxValue) * 100 : 0;
                     
                     const rowHTML = `
@@ -820,9 +822,12 @@
                             </div>
                         </div>
                     `;
-                    
                     reasonsContainer.innerHTML += rowHTML;
                 });
+
+                if (!hasReasons) {
+                    reasonsContainer.innerHTML = `<p class="text-sm text-gray-500">Nenhum dado de motivo disponível para este período.</p>`;
+                }
             }
 
             /**
@@ -871,7 +876,6 @@
                             detailsHTML += `
                                 <div class="p-4 rounded-lg ring-1 ${colors.ring} ${colors.bg}">
                                     <h5 class="font-bold ${colors.text}">Nota ${detail.nota} <span class="font-normal text-sm ${colors.text.replace('800', '600')}">(${detail.count} avaliações)</span></h5>
-                                    <p class="mt-2 text-sm ${colors.text.replace('800', '500')}">${detail.motivos}</p>
                                 </div>
                             `;
                         });
