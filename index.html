@@ -192,10 +192,11 @@
                                 <option value="setembro">01/09 a 30/09</option>
                                 <option value="outubro">01/10 a 24/10</option>
                                 <option value="outubro-nov">24/10 a 04/11</option>
-                                <option value="novembro-inicio" selected>01/11 a 10/11</option>
+                                <option value="novembro-inicio">01/11 a 10/11</option>
+                                <option value="novembro-meio" selected>10/11 a 20/11</option>
                             </select>
                         </div>
-                        <p class="text-md text-gray-400 mt-2" id="period-text">01/11 a 10/11</p>
+                        <p class="text-md text-gray-400 mt-2" id="period-text">10/11 a 20/11</p>
                     </div>
                 </div>
 
@@ -605,6 +606,79 @@
                         volume: 802,
                         nota: 4.46, // Média calculada
                         tma: 41.7 // Média calculada
+                    }
+                },
+                'novembro-meio': {
+                    periodLabel: '10/11 a 20/11',
+                    team: [
+                        { nome: 'Pedro', chat: 36, atendimentos: 15, os: 6, nota: 4.13, tma: 246, ativacoes: 9 },
+                        { nome: 'Vinicius', chat: 0, atendimentos: 0, os: 0, nota: 0, tma: 0, ativacoes: 0 }, // FÉRIAS
+                        { nome: 'Paulo', chat: 64, atendimentos: 1, os: 6, nota: 4.76, tma: 60, ativacoes: 23 },
+                        { nome: 'Ricardo (12x36)', chat: 90, atendimentos: 41, os: 7, nota: 4.61, tma: 37, ativacoes: 7 },
+                        { nome: 'Matheus (12x36)', chat: 91, atendimentos: 23, os: 6, nota: 4.37, tma: 23, ativacoes: 8 },
+                        { nome: 'Robson (12x36)', chat: 171, atendimentos: 93, os: 4, nota: 4.66, tma: 19, ativacoes: 25 },
+                        { nome: 'Leonardo (12x36)', chat: 94, atendimentos: 36, os: 3, nota: 4.68, tma: 43, ativacoes: 2 }
+                    ],
+                    reasons: { 
+                        'Sem internet/Visita': 34,
+                        'Sem Internet/Resolvido': 87, 
+                        'Internet Lenta/Resolvido': 40,
+                        'Internet Lenta/Visita': 26, 
+                        'Rompimento de fibra': 66,
+                        'Falha Massiva': 89,
+                        'Inatividade do cliente': 63, 
+                        'Assuntos Financeiros': 172, 
+                        'Assuntos Comerciais': 11,
+                        'Agendamento': 31
+                    },
+                    lowScores: {
+                        'Pedro': [
+                            { nota: 1, count: 3},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 3}
+                        ],
+                        'Vinicius': [
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 0}
+                        ],
+                        'Robson (12x36)': [
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 9}
+                        ],
+                        'Leonardo (12x36)': [
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 7}
+                        ],
+                        'Matheus (12x36)': [
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 1},
+                            { nota: 3, count: 3},
+                            { nota: 4, count: 6}
+                        ],
+                        'Paulo': [
+                            { nota: 1, count: 0},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 0},
+                            { nota: 4, count: 5}
+                        ],
+                        'Ricardo (12x36)': [
+                            { nota: 1, count: 1},
+                            { nota: 2, count: 0},
+                            { nota: 3, count: 1},
+                            { nota: 4, count: 6}
+                        ]
+                    },
+                    keyMetrics: {
+                        volume: 546, // Soma dos chats (ignorando "802" do PDF que parece copiado)
+                        nota: 4.53, // Média calculada (excluindo Vinicius)
+                        tma: 71.3 // Média calculada (excluindo Vinicius)
                     }
                 }
             };
@@ -1349,7 +1423,7 @@
             // --- Inicialização ---
 
             // Inicializar a "Visão Geral" com o período mais recente
-            updateReport('novembro-inicio');
+            updateReport('novembro-meio');
             
             // Construir a "Página Comparativa" (só precisa ser feito uma vez)
             buildComparativeView();
